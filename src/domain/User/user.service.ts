@@ -1,4 +1,5 @@
-import { User } from '@/models/User';
+import { User } from "@/domain/User/user.types";
+
 
 /**
  * UserService

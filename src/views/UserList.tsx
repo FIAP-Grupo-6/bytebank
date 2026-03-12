@@ -1,7 +1,8 @@
 'use client';
 
+import { useUserViewModel } from '@/domain/User';
 import { useEffect } from 'react';
-import { useUserViewModel } from '@/viewmodels/UserViewModel';
+
 
 /**
  * UserList View

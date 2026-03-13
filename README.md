@@ -2,7 +2,7 @@
 
 A modern banking application built with Next.js for FIAP POS graduation project.
 
-- **Slides**: [text](https://skywork.live/share/v2/ppt/2032202556944011264?pid=2032202002860441600&sid=gen_ppt-NjH4a7u22&t=gen_ppt&mode=102)
+- **Slides**: [Show Preview](https://skywork.live/share/v2/ppt/2032202556944011264?pid=2032202002860441600&sid=gen_ppt-NjH4a7u22&t=gen_ppt&mode=102)
 
 ## Stack
 

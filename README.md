@@ -2,6 +2,8 @@
 
 A modern banking application built with Next.js for FIAP POS graduation project.
 
+- **Slides**: [text](https://skywork.live/share/v2/ppt/2032202556944011264?pid=2032202002860441600&sid=gen_ppt-NjH4a7u22&t=gen_ppt&mode=102)
+
 ## Stack
 
 - **Framework**: Next.js 15 with TypeScript
@@ -16,17 +18,15 @@ A modern banking application built with Next.js for FIAP POS graduation project.
 
 ```
 src/
-├── app/              # Next.js App Router pages
-├── components/       # Reusable UI components
+├── app/             # Next.js App Router pages
+├── components/      # Reusable UI components
 │   └── ui/          # shadcn/ui components
+├── domain/          # Domain modules (types, services, use cases)
 ├── hooks/           # Custom React hooks
-├── models/          # Data models with Zod schemas
-├── services/        # API and business logic services
 ├── styles/          # Global styles
 ├── types/           # TypeScript type definitions
 ├── utils/           # Utility functions
-├── views/           # MVVM view components
-└── viewmodels/      # MVVM view models (state & logic hooks)
+└── views/           # MVVM view components
 
 .storybook/          # Storybook configuration
 ```
@@ -35,16 +35,16 @@ src/
 
 The project follows the **Model-View-ViewModel** (MVVM) pattern:
 
-- **Model**: Data structures defined in `/src/models` with Zod validation
-- **ViewModel**: Custom hooks in `/src/viewmodels` managing state and business logic
+- **Model**: Domain types and schemas defined in `/src/domain` with Zod validation
+- **ViewModel**: Hooks inside domain use cases (for example `/src/domain/User/useCases`) managing state and business logic
 - **View**: React components in `/src/views` consuming the ViewModel
 
 ### Example Flow
 
-1. **Model** (`src/models/User.ts`): Defines User schema with Zod
-2. **Service** (`src/services/UserService.ts`): Handles API calls
-3. **ViewModel** (`src/viewmodels/UserViewModel.ts`): Custom hook managing user state
-4. **View** (`src/views/UserList.tsx`): Component using the ViewModel
+1. **Model** (`src/domain/User/user.types.ts`): Defines `UserSchema` and `User` type with Zod
+2. **Service** (`src/domain/User/user.service.ts`): Handles user API calls
+3. **ViewModel** (`src/domain/User/useCases/UserViewModel.ts`): Provides `useUserViewModel` for state and actions
+4. **View** (`src/views/UserList.tsx`): `UserListView` consumes the ViewModel
 
 ## Getting Started
 

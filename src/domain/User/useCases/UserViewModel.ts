@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { User } from '@/models/User';
-import { userService } from '@/services/UserService';
+import { User } from '@/domain/User/user.types';
+import { userService } from '@/domain/User/user.service';
 
 /**
  * UserViewModel

@@ -41,20 +41,124 @@
       "type": "pagamento"
     },
     {
-      "id": 9,
-      "description": "Transferência Investimento",
-      "date": "2026-04-01",
-      "category": "Investimento",
-      "value": -2000,
-      "type": "transferencia"
-    },
-    {
       "id": 10,
       "description": "Devolução de Compra",
       "date": "2026-03-31",
       "category": "Reembolso",
       "value": 250,
       "type": "deposito"
+    },
+    {
+      "id": 11,
+      "description": "Supermercado Carrefour",
+      "date": "2026-04-08",
+      "category": "Alimentação",
+      "value": -234.90,
+      "type": "pagamento"
+    },
+    {
+      "id": 12,
+      "description": "Salário Mensal",
+      "date": "2026-04-01",
+      "category": "Renda",
+      "value": 5000,
+      "type": "deposito"
+    },
+    {
+      "id": 13,
+      "description": "Conta de Luz",
+      "date": "2026-04-05",
+      "category": "Utilidades",
+      "value": -189.45,
+      "type": "pagamento"
+    },
+    {
+      "id": 14,
+      "description": "Transferência para Maria",
+      "date": "2026-04-06",
+      "category": "Transferência",
+      "value": -500,
+      "type": "transferencia"
+    },
+    {
+      "id": 15,
+      "description": "Cinema - Ingresso",
+      "date": "2026-04-07",
+      "category": "Lazer",
+      "value": -60,
+      "type": "pagamento"
+    },
+    {
+      "id": 16,
+      "description": "Saque em caixa",
+      "date": "2026-04-08",
+      "category": "Saque",
+      "value": -200,
+      "type": "saque"
+    },
+    {
+      "id": 17,
+      "description": "Farmácia Genérico",
+      "date": "2026-04-09",
+      "category": "Saúde",
+      "value": -95.30,
+      "type": "pagamento"
+    },
+    {
+      "id": 18,
+      "description": "Consulta Odontológica",
+      "date": "2026-04-10",
+      "category": "Saúde",
+      "value": -350,
+      "type": "pagamento"
+    },
+    {
+      "id": 19,
+      "description": "Streaming Netflix",
+      "date": "2026-04-01",
+      "category": "Entretenimento",
+      "value": -39.90,
+      "type": "pagamento"
+    },
+    {
+      "id": 20,
+      "description": "Compra Amazon",
+      "date": "2026-04-06",
+      "category": "Compras",
+      "value": -156.75,
+      "type": "pagamento"
+    },
+    {
+      "id": 21,
+      "description": "Bônus Anual",
+      "date": "2026-03-28",
+      "category": "Renda",
+      "value": 2000,
+      "type": "deposito"
+    },
+    {
+      "id": 22,
+      "description": "Aluguel Apartamento",
+      "date": "2026-04-01",
+      "category": "Habitação",
+      "value": -1200,
+      "type": "pagamento"
+    },
+    {
+      "id": 23,
+      "description": "Uber para trabalho",
+      "date": "2026-04-05",
+      "category": "Transporte",
+      "value": -45.80,
+      "type": "pagamento"
+    },
+    {
+      "id": 24,
+      "description": "Clube de Futebol",
+      "date": "2026-04-01",
+      "category": "Esportes",
+      "value": -120,
+      "type": "pagamento"
     }
   ]
 }

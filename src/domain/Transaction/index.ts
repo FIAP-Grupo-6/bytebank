@@ -1,4 +1,2 @@
-export { TransactionService, transactionService } from './transaction.service';
-export type { Transaction } from './transaction.types';
-export { TransactionSchema, TransactionResponseSchema } from './transaction.types';
+export { transactionService, TransactionService } from './transaction.service';
 export { transactionViewModel, TransactionViewModel } from './useCases/TransactionViewModel';

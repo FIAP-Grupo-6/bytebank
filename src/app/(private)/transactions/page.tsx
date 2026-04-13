@@ -28,7 +28,6 @@ export default function Transactions() {
 
   const { search, setSearch, filter, setFilter, filteredTransactions } = useTransactionFilters({ transactions: transactions || [] });
 
-  // Analisar se é possivel levar o delete para outro arquivo
   const handleDeleteClick = (id: number, description: string) => {
     setDeleteConfirm({ id, description });
   };
@@ -61,14 +60,12 @@ export default function Transactions() {
           </Button>
         </div>
 
-        // Levar para o componente de List
         {error && (
           <div className="bg-destructive/10 border border-destructive text-destructive rounded-lg p-4">
             <p className="text-sm">Erro ao carregar transações: {error.message}</p>
           </div>
         )}
 
-        // Levar para o componente de List
         {loading && (
           <div className="bg-card border border-border rounded-xl p-8">
             <p className="text-center text-muted-foreground">Carregando transações...</p>
@@ -89,7 +86,6 @@ export default function Transactions() {
               onChange={(value) => setFilter(value as FilterType)}
             />
 
-            // Criar um componente chamado List
             <div className="bg-card border border-border rounded-xl overflow-hidden">
               <div className="divide-y divide-border">
                 {filteredTransactions.map((t) => (

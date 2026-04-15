@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Title from "@/components/shared/title";
@@ -12,14 +11,15 @@ import MessageConfirm from "@/components/shared/message-confirm";
 import Text from "@/components/shared/text";
 import { useTransactionFilters, FilterType } from "@/hooks/useTransactionFilters";
 import { useAsync } from "@/hooks/useAsync";
+import { useDeleteTransaction } from "@/hooks/useDeleteTransaction";
 import { transactionViewModel } from "@/domain/Transaction";
 
 export default function Transactions() {
   const { data: transactions, loading, error, execute: refetchTransactions } = useAsync(transactionViewModel.getAll);
   const { search, setSearch, filter, setFilter, filteredTransactions } = useTransactionFilters({ transactions: transactions || [] });
-  
-  const [deleteConfirm, setDeleteConfirm] = useState<{ id: number; description: string } | null>(null);
-  const [deleting, setDeleting] = useState(false);
+  const { deleteConfirm, deleting, handleDeleteClick, handleConfirmDelete, handleCancelDelete } = useDeleteTransaction(async () => {
+    await refetchTransactions();
+  });
 
   const filters = [
     { label: "Todos", value: "todos" },
@@ -28,25 +28,6 @@ export default function Transactions() {
     { label: "Transferências", value: "transferencia" },
     { label: "Saques", value: "saque" },
   ];
-
-  const handleDeleteClick = (id: number, description: string) => {
-    setDeleteConfirm({ id, description });
-  };
-
-  const handleConfirmDelete = async () => {
-    if (!deleteConfirm) return;
-
-    try {
-      setDeleting(true);
-      await transactionViewModel.delete(deleteConfirm.id);
-      setDeleteConfirm(null);
-      await refetchTransactions();
-    } catch (err) {
-      console.error("Erro ao deletar transação:", err);
-    } finally {
-      setDeleting(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background text-foreground p-6">
@@ -118,7 +99,7 @@ export default function Transactions() {
             isDestructive
             loading={deleting}
             onConfirm={handleConfirmDelete}
-            onCancel={() => setDeleteConfirm(null)}
+            onCancel={handleCancelDelete}
           />
         )}
       </div>

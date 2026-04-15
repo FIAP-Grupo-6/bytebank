@@ -11,36 +11,36 @@ export class TransactionViewModel {
   /**
    * Fetch all transactions
    */
-  async getTransactions(): Promise<Transaction[]> {
-    return await transactionService.getTransactions();
+  async getAll(): Promise<Transaction[]> {
+    return await transactionService.getAll();
   }
 
   /**
    * Fetch a transaction by ID
    */
-  async getTransactionById(id: number): Promise<Transaction> {
-    return await transactionService.getTransactionById(id);
+  async getById(id: number): Promise<Transaction> {
+    return await transactionService.getById(id);
   }
 
   /**
    * Create a new transaction
    */
-  async createTransaction(transaction: Omit<Transaction, 'id'>): Promise<Transaction> {
-    return await transactionService.createTransaction(transaction);
+  async create(transaction: Omit<Transaction, 'id'>): Promise<Transaction> {
+    return await transactionService.create(transaction);
   }
 
   /**
    * Update a transaction
    */
-  async updateTransaction(id: number, transaction: Partial<Transaction>): Promise<Transaction> {
-    return await transactionService.updateTransaction(id, transaction);
+  async update(id: number, transaction: Partial<Transaction>): Promise<Transaction> {
+    return await transactionService.update(id, transaction);
   }
 
   /**
    * Delete a transaction
    */
-  async deleteTransaction(id: number): Promise<void> {
-    return await transactionService.deleteTransaction(id);
+  async delete(id: number): Promise<void> {
+    return await transactionService.delete(id);
   }
 }
 

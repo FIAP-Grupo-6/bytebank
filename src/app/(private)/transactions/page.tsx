@@ -9,12 +9,14 @@ import ListItem from "@/components/shared/list-item";
 import SearchInput from "@/components/shared/search-input";
 import FilterButtons from "@/components/shared/filter-buttons";
 import MessageConfirm from "@/components/shared/message-confirm";
+import Text from "@/components/shared/text";
 import { useTransactionFilters, FilterType } from "@/hooks/useTransactionFilters";
 import { useAsync } from "@/hooks/useAsync";
 import { transactionViewModel } from "@/domain/Transaction";
 
 export default function Transactions() {
-  const { data: transactions, loading, error, execute: refetchTransactions } = useAsync(transactionViewModel.getTransactions);
+  const { data: transactions, loading, error, execute: refetchTransactions } = useAsync(transactionViewModel.getAll);
+  const { search, setSearch, filter, setFilter, filteredTransactions } = useTransactionFilters({ transactions: transactions || [] });
   
   const [deleteConfirm, setDeleteConfirm] = useState<{ id: number; description: string } | null>(null);
   const [deleting, setDeleting] = useState(false);
@@ -27,8 +29,6 @@ export default function Transactions() {
     { label: "Saques", value: "saque" },
   ];
 
-  const { search, setSearch, filter, setFilter, filteredTransactions } = useTransactionFilters({ transactions: transactions || [] });
-
   const handleDeleteClick = (id: number, description: string) => {
     setDeleteConfirm({ id, description });
   };
@@ -38,7 +38,7 @@ export default function Transactions() {
 
     try {
       setDeleting(true);
-      await transactionViewModel.deleteTransaction(deleteConfirm.id);
+      await transactionViewModel.delete(deleteConfirm.id);
       setDeleteConfirm(null);
       await refetchTransactions();
     } catch (err) {
@@ -63,13 +63,13 @@ export default function Transactions() {
 
         {error && (
           <div className="bg-destructive/10 border border-destructive text-destructive rounded-lg p-4">
-            <p className="text-sm">Erro ao carregar transações: {error.message}</p>
+            <Text>Erro ao carregar transações: {error.message}</Text>
           </div>
         )}
 
         {loading && (
-          <div className="bg-card border border-border rounded-xl p-8">
-            <p className="text-center text-muted-foreground">Carregando transações...</p>
+          <div className="bg-card border border-border rounded-xl p-8 text-center">
+            <Text>Carregando transações...</Text>
           </div>
         )}
 
@@ -102,8 +102,8 @@ export default function Transactions() {
               )}
             />
 
-            <div className="text-center text-sm text-muted-foreground">
-              {filteredTransactions.length} transações encontradas
+            <div className="text-center">
+              <Text>{filteredTransactions.length} transações encontradas</Text>
             </div>
           </>
         )}

@@ -11,7 +11,7 @@ export class TransactionService {
   /**
    * Fetch all transactions
    */
-  async getTransactions(): Promise<Transaction[]> {
+  async getAll(): Promise<Transaction[]> {
     const response = await fetch(`${this.baseUrl}/transactions`);
     if (!response.ok) {
       throw new Error('Falha ao buscar transações');
@@ -23,7 +23,7 @@ export class TransactionService {
   /**
    * Fetch a transaction by ID
    */
-  async getTransactionById(id: number): Promise<Transaction> {
+  async getById(id: number): Promise<Transaction> {
     const response = await fetch(`${this.baseUrl}/transactions/${id}`);
     if (!response.ok) {
       throw new Error('Falha ao buscar transação');
@@ -34,7 +34,7 @@ export class TransactionService {
   /**
    * Create a new transaction
    */
-  async createTransaction(transaction: Omit<Transaction, 'id'>): Promise<Transaction> {
+  async create(transaction: Omit<Transaction, 'id'>): Promise<Transaction> {
     const response = await fetch(`${this.baseUrl}/transactions`, {
       method: 'POST',
       headers: {
@@ -51,7 +51,7 @@ export class TransactionService {
   /**
    * Update a transaction
    */
-  async updateTransaction(id: number, transaction: Partial<Transaction>): Promise<Transaction> {
+  async update(id: number, transaction: Partial<Transaction>): Promise<Transaction> {
     const response = await fetch(`${this.baseUrl}/transactions/${id}`, {
       method: 'PUT',
       headers: {
@@ -68,7 +68,7 @@ export class TransactionService {
   /**
    * Delete a transaction
    */
-  async deleteTransaction(id: number): Promise<void> {
+  async delete(id: number): Promise<void> {
     const response = await fetch(`${this.baseUrl}/transactions/${id}`, {
       method: 'DELETE',
     });

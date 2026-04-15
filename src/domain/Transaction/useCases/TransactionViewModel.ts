@@ -11,14 +11,14 @@ export class TransactionViewModel {
   /**
    * Fetch all transactions
    */
-  async fetchAllTransactions(): Promise<Transaction[]> {
+  async getTransactions(): Promise<Transaction[]> {
     return await transactionService.getTransactions();
   }
 
   /**
    * Fetch a transaction by ID
    */
-  async fetchTransactionById(id: number): Promise<Transaction> {
+  async getTransactionById(id: number): Promise<Transaction> {
     return await transactionService.getTransactionById(id);
   }
 

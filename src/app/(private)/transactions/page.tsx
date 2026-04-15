@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Title from "@/components/shared/title";
+import List from "@/components/shared/list";
 import ListItem from "@/components/shared/list-item";
 import SearchInput from "@/components/shared/search-input";
 import FilterButtons from "@/components/shared/filter-buttons";
@@ -13,7 +14,7 @@ import { useAsync } from "@/hooks/useAsync";
 import { transactionViewModel } from "@/domain/Transaction";
 
 export default function Transactions() {
-  const { data: transactions, loading, error, execute: refetchTransactions } = useAsync(transactionViewModel.fetchAllTransactions);
+  const { data: transactions, loading, error, execute: refetchTransactions } = useAsync(transactionViewModel.getTransactions);
   
   const [deleteConfirm, setDeleteConfirm] = useState<{ id: number; description: string } | null>(null);
   const [deleting, setDeleting] = useState(false);
@@ -86,28 +87,20 @@ export default function Transactions() {
               onChange={(value) => setFilter(value as FilterType)}
             />
 
-            <div className="bg-card border border-border rounded-xl overflow-hidden">
-              <div className="divide-y divide-border">
-                {filteredTransactions.map((t) => (
-                  <ListItem
-                    key={t.id}
-                    description={t.description}
-                    date={t.date}
-                    category={t.category}
-                    value={t.value}
-                    type={t.type}
-                    onEdit={() => console.log("Editar", t.id)}
-                    onDelete={() => handleDeleteClick(t.id, t.description)}
-                  />
-                ))}
-
-                {filteredTransactions.length === 0 && (
-                  <div className="py-6 text-center text-sm text-muted-foreground">
-                    Nenhuma transação encontrada
-                  </div>
-                )}
-              </div>
-            </div>
+            <List
+              items={filteredTransactions}
+              renderItem={(transaction) => (
+                <ListItem
+                  description={transaction.description}
+                  date={transaction.date}
+                  category={transaction.category}
+                  value={transaction.value}
+                  type={transaction.type}
+                  onEdit={() => console.log("Editar", transaction.id)}
+                  onDelete={() => handleDeleteClick(transaction.id, transaction.description)}
+                />
+              )}
+            />
 
             <div className="text-center text-sm text-muted-foreground">
               {filteredTransactions.length} transações encontradas

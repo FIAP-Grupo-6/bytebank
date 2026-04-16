@@ -1,5 +1,5 @@
 import React from "react";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, Banknote, CreditCard, ArrowLeftRight, Download } from "lucide-react";
 
 interface ListItemProps {
   description: string;
@@ -16,6 +16,7 @@ export default function ListItem({
   date,
   category,
   value,
+  type,
   onEdit,
   onDelete,
 }: ListItemProps) {
@@ -25,6 +26,21 @@ export default function ListItem({
     currency: "BRL",
   });
 
+  const getTypeIcon = () => {
+    switch (type) {
+      case "deposito":
+        return <Banknote size={15} />;
+      case "pagamento":
+        return <CreditCard size={15} />;
+      case "transferencia":
+        return <ArrowLeftRight size={15} />;
+      case "saque":
+        return <Download size={15} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div
       className="
@@ -33,9 +49,16 @@ export default function ListItem({
         hover:bg-surface-hover transition-colors cursor-pointer
       "
     >
-      <div className="space-y-1">
-        <p className="text-sm font-medium">{description}</p>
-        <div className="text-xs text-muted-foreground">{formattedDate}</div>
+      <div className="flex items-center gap-3">
+        <div className="p-2 rounded-lg bg-muted">
+          <span className="text-muted-foreground">
+            {getTypeIcon()}
+          </span>
+        </div>
+        <div className="space-y-1">
+          <p className="text-sm font-medium">{description}</p>
+          <div className="text-xs text-muted-foreground">{formattedDate}</div>
+        </div>
       </div>
 
       <div className="flex items-center gap-3">

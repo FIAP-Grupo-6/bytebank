@@ -2,13 +2,13 @@
 
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Title from "@/components/shared/title";
-import List from "@/components/shared/list";
+import Title from "@/components/ui/title";
+import List from "@/components/ui/list";
 import ListItem from "@/components/shared/list-item";
-import SearchInput from "@/components/shared/search-input";
+import SearchInput from "@/components/ui/search-input";
 import FilterButtons from "@/components/shared/filter-buttons";
 import MessageConfirm from "@/components/shared/message-confirm";
-import Text from "@/components/shared/text";
+import Text from "@/components/ui/text";
 import { useTransactionFilters, FilterType } from "@/hooks/useTransactionFilters";
 import { useAsync } from "@/hooks/useAsync";
 import { useDeleteTransaction } from "@/hooks/useDeleteTransaction";

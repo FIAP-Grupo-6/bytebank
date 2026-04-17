@@ -1,23 +1,29 @@
-import type { Metadata } from 'next';
-import '@/styles/globals.css';
-import Sidebar from '@/components/layout/sidebar';
-import Header from '@/components/layout/header';
+import type { Metadata } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import "@/styles/globals.css";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
 
 export const metadata: Metadata = {
   title: 'ByteBank',
-  description: 'A modern banking application built with Next.js',
+  description: 'Sistema de controle financeiro',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="pt-BR">
-      <body>
-        <div className="flex md:flex-row flex-col">
-          <Header />
-          <Sidebar />
-          <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-6 pb-15 md:px-6 md:py-8">{children}</main>
-        </div>
-      </body>
+    <html
+      lang="pt-BR"
+      className={`${plusJakartaSans.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

@@ -1,15 +1,11 @@
 import { Card, CardContent } from '@/components/ui/card';
+import { formatCurrency } from '@/utils/formatters';
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 
-export function SummaryCard() {
-  const income = 111119747.2;
-  const expense = 100013388.1;
-  const total = income + expense;
+export function SummaryCard({ income, expense }: { income: number; expense: number }) {
+  const total = income + expense || 1;
   const incomePercentage = (income / total) * 100;
   const expensePercentage = (expense / total) * 100;
-
-  const format = (value: number) =>
-    value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
   return (
     <Card>
@@ -22,7 +18,7 @@ export function SummaryCard() {
               Receitas
             </div>
             <p className="text-base sm:text-lg lg:text-xl font-semibold truncate">
-              {format(income)}
+              {formatCurrency(income).formatted}
             </p>
           </div>
           <div className="min-w-0 sm:text-right">
@@ -31,7 +27,7 @@ export function SummaryCard() {
               Despesas
             </div>
             <p className="text-base sm:text-lg lg:text-xl font-semibold truncate">
-              {format(expense)}
+              {formatCurrency(expense).formatted}
             </p>
           </div>
         </div>

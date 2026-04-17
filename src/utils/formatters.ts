@@ -1,0 +1,49 @@
+export type FormatCurrencyOptions = {
+  locale?: string;
+  currency?: string;
+  minimumFractionDigits?: number;
+  maximumFractionDigits?: number;
+  showSign?: boolean;
+};
+
+export type FormatCurrencyResult = {
+  amount: string;
+  formatted: string;
+};
+
+export function formatCurrency(
+  value: number,
+  options: FormatCurrencyOptions = {}
+): FormatCurrencyResult {
+  const {
+    locale = 'pt-BR',
+    currency = 'BRL',
+    minimumFractionDigits = 2,
+    maximumFractionDigits = 2,
+    showSign = true,
+  } = options;
+
+  const normalizedValue = showSign ? value : Math.abs(value);
+
+  const formatter = new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency,
+    minimumFractionDigits,
+    maximumFractionDigits,
+  });
+
+  const formatted = formatter.format(normalizedValue);
+
+  const parts = formatter.formatToParts(normalizedValue);
+
+  const amount = parts
+    .filter((part) => part.type !== 'currency')
+    .map((part) => part.value)
+    .join('')
+    .trim();
+
+  return {
+    amount,
+    formatted,
+  };
+}

@@ -1,14 +1,14 @@
-'use client';
+import Link from 'next/link';
+import { SidebarTrigger } from '../ui/sidebar';
+import { Logo } from './logo';
 
-import { Menu } from 'lucide-react';
-
-export default function Header() {
+export function Header() {
   return (
-    <header className="h-16 bg-sidebar-background w-screen p-3 md:hidden flex items-center">
-      <button className="flex items-center gap-2 cursor-pointer">
-        <Menu />
-      </button>
-      <span className="text-white text-lg font-bold ml-auto">ByteBank</span>
+    <header className="sticky top-0 z-10 flex items-center gap-4 p-4 border-b md:hidden bg-background">
+      <SidebarTrigger className="cursor-pointer" />
+      <Link href="/dashboard" aria-label="Home">
+        <Logo />
+      </Link>
     </header>
   );
 }

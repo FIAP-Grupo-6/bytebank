@@ -4,6 +4,8 @@ import { BalanceCard } from '@/features/dashboard/balance-card';
 import { Extract } from '@/features/dashboard/extract';
 import { SummaryCard } from '@/features/dashboard/summary-card';
 import { Plus } from 'lucide-react';
+import Title from "@/components/ui/title";
+import Text from "@/components/ui/text";
 
 export default async function Dashboard() {
   const { balance, income, expense, recentTransactions } = await getDashboardData()
@@ -12,8 +14,8 @@ export default async function Dashboard() {
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs text-muted-foreground capitalize">Abril 2026</p>
-          <h1 className="text-2xl font-bold">Bem-vindo, Usuário</h1>
+          <Text>Abril 2026</Text>
+          <Title>Bem-vindo, Usuário</Title>
         </div>
         <Button className="hidden md:inline-flex" label="Nova transação" icon={Plus} />
       </div>

@@ -1,10 +1,9 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/shared/button';
 import Title from "@/components/ui/title";
-import List from "@/components/ui/list";
-import ListItem from "@/components/shared/list-item";
+import List from "@/components/shared/list";
 import SearchInput from "@/components/ui/search-input";
 import FilterButtons from "@/components/shared/filter-buttons";
 import MessageConfirm from "@/components/shared/message-confirm";
@@ -13,6 +12,7 @@ import { useTransactionFilters, FilterType } from "@/hooks/useTransactionFilters
 import { useAsync } from "@/hooks/useAsync";
 import { useDeleteTransaction } from "@/hooks/useDeleteTransaction";
 import { transactionViewModel } from "@/domain/Transaction";
+import TransactionListItem from "@/components/shared/transaction-list-item";
 
 export default function Transactions() {
   const { data: transactions, loading, error, execute: refetchTransactions } = useAsync(transactionViewModel.getAll);
@@ -30,16 +30,13 @@ export default function Transactions() {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-6">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="space-y-6">
 
         <div className="flex items-center justify-between">
           <Title>Transações</Title>
 
-          <Button className="gap-2">
-            <Plus size={16} />
-            Adicionar transação
-          </Button>
+          <Button label="Nova transação" icon={Plus} />
         </div>
 
         {error && (
@@ -71,7 +68,7 @@ export default function Transactions() {
             <List
               items={filteredTransactions}
               renderItem={(transaction) => (
-                <ListItem
+                <TransactionListItem
                   description={transaction.description}
                   date={transaction.date}
                   category={transaction.category}
@@ -97,7 +94,6 @@ export default function Transactions() {
             confirmText="Deletar"
             cancelText="Cancelar"
             isDestructive
-            loading={deleting}
             onConfirm={handleConfirmDelete}
             onCancel={handleCancelDelete}
           />

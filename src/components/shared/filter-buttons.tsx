@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "./button";
 
 interface FilterOption {
   label: string;
@@ -19,8 +20,11 @@ export default function FilterButtons({
   return (
     <div className="flex gap-2 flex-wrap">
       {filters.map((f) => (
-        <button
+        <Button
           key={f.value}
+          variant="secondary"
+          label={f.label}
+          size="sm"
           onClick={() => onChange(f.value)}
           className={`
             px-3 py-1.5 text-sm rounded-md transition-colors border
@@ -30,9 +34,7 @@ export default function FilterButtons({
                 : "bg-muted text-muted-foreground border-border hover:bg-surface-hover"
             }
           `}
-        >
-          {f.label}
-        </button>
+        />
       ))}
     </div>
   );

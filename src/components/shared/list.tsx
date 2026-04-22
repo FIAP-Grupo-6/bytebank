@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Text from "../ui/text";
 
 interface ListProps<T> {
   items: T[];
@@ -19,9 +20,9 @@ export default function List<T extends { id: number | string }>({
         ))}
 
         {items.length === 0 && (
-          <div className="py-6 text-center text-sm text-muted-foreground">
+          <Text className="py-6 text-center text-sm text-muted-foreground">
             {emptyMessage}
-          </div>
+          </Text>
         )}
       </div>
     </div>

@@ -18,6 +18,8 @@ import { Logo } from './logo';
 export function AppSidebar() {
   const pathname = usePathname();
 
+  const isRouteActive = (href: string) => pathname === href
+
   return (
     <Sidebar variant="sidebar" collapsible="icon" side="left">
       <SidebarHeader className="p-4">
@@ -31,7 +33,7 @@ export function AppSidebar() {
           <SidebarMenu className="gap-2">
             {navItems.map(({ href, label, icon: Icon }) => (
               <SidebarMenuItem key={href}>
-                <SidebarMenuButton tooltip={label} isActive={pathname === href} asChild>
+                <SidebarMenuButton tooltip={label} isActive={isRouteActive(href)} asChild>
                   <Link href={href} aria-label={label}>
                     <Icon />
                     <span>{label}</span>

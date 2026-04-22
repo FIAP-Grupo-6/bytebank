@@ -1,4 +1,4 @@
-interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
   type?: | "default" | "yellow" | "blue" | "green" | "purple" | "pink" | "red" | "teal";
 }

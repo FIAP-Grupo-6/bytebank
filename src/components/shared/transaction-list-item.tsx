@@ -3,14 +3,15 @@ import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "./button";
 import Text from "../ui/text";
 import Title from "../ui/title";
-import { Badge } from "../ui/badge";
+import { Badge, BadgeProps } from "../ui/badge";
 import { Amount } from "../ui/amount";
 import { TransactionIcon } from "./transaction-icon";
+import { Category, categoryMap } from "@/types/category";
 
 interface TransactionListItemProps {
   description: string;
   date: string;
-  category: string;
+  category: Category;
   value: number;
   type: "deposito" | "pagamento" | "transferencia" | "saque";
   onEdit?: () => void;
@@ -27,6 +28,7 @@ export default function TransactionListItem({
   onDelete,
 }: TransactionListItemProps) {
   const formattedDate = new Date(date).toLocaleDateString("pt-BR", { day: "numeric", month: "short" });
+  const configCategory = categoryMap[category] ?? categoryMap["other"];
 
   return (
     <div
@@ -46,7 +48,7 @@ export default function TransactionListItem({
       </div>
 
       <div className="flex items-center gap-3">
-        <Badge>{category}</Badge>
+        <Badge type={configCategory.badge}>{configCategory.label}</Badge>
 
         <Amount value={value} />
 

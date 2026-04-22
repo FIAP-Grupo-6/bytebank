@@ -1,21 +1,14 @@
-'use client'
-
 import { Button } from '@/components/shared/button';
+import { getDashboardData } from '@/domain/Dashboard/useCases/get-dashboard-data';
 import { BalanceCard } from '@/features/dashboard/balance-card';
-import { DashboardSkeleton } from '@/features/dashboard/dashboard-skeleton';
 import { Extract } from '@/features/dashboard/extract';
 import { SummaryCard } from '@/features/dashboard/summary-card';
-import { useDashboard } from '@/hooks/dashboard/use-dashboard';
 import { Plus } from 'lucide-react';
 import Title from "@/components/ui/title";
 import Text from "@/components/ui/text";
 
-export default function Dashboard() {
-  const { balance, income, expense, recentTransactions, loading } = useDashboard()
-
-  if(loading) {
-    return <DashboardSkeleton />
-  }
+export default async function Dashboard() {
+  const { balance, income, expense, recentTransactions } = await getDashboardData()
 
   return (
     <div className="flex flex-col gap-8">

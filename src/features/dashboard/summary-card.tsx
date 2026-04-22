@@ -2,7 +2,15 @@ import { Card, CardContent } from '@/components/ui/card';
 import { formatCurrency } from '@/utils/formatters';
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 
-export function SummaryCard({ income, expense }: { income: number; expense: number }) {
+export function SummaryCard({
+  hasTransactions,
+  income,
+  expense,
+}: {
+  hasTransactions: boolean;
+  income: number;
+  expense: number;
+}) {
   const total = income + expense || 1;
   const incomePercentage = (income / total) * 100;
   const expensePercentage = (expense / total) * 100;
@@ -31,10 +39,15 @@ export function SummaryCard({ income, expense }: { income: number; expense: numb
             </p>
           </div>
         </div>
-        <div className="flex h-2 rounded-full overflow-hidden gap-0.5">
-          <div className="bg-primary rounded-full" style={{ width: `${incomePercentage}%` }} />
-          <div className="bg-destructive rounded-full" style={{ width: `${expensePercentage}%` }} />
-        </div>
+        {hasTransactions && (
+          <div className="flex h-2 rounded-full overflow-hidden gap-0.5">
+            <div className="bg-primary rounded-full" style={{ width: `${incomePercentage}%` }} />
+            <div
+              className="bg-destructive rounded-full"
+              style={{ width: `${expensePercentage}%` }}
+            />
+          </div>
+        )}
       </CardContent>
     </Card>
   );

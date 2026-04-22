@@ -22,11 +22,15 @@ export default async function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <BalanceCard value={balance} />
-        <SummaryCard income={income} expense={expense} />
+        <SummaryCard
+          hasTransactions={recentTransactions.length > 0}
+          income={income}
+          expense={expense}
+        />
       </div>
 
       <Extract transactions={recentTransactions} />
-      
+
       <Button
         className="fixed bottom-6 right-6 md:hidden shadow-lg"
         icon={Plus}

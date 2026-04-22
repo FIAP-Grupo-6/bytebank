@@ -22,7 +22,7 @@ export function Extract({ transactions }: { transactions: Transaction[] }) {
             <TransactionListItem key={transaction.id} transaction={transaction} />
           ))
         ) : (
-          <span className="text-center text-sm text-muted-foreground">Nenhuma item encontrado</span>
+          <span className="text-center text-sm text-muted-foreground">Nenhum item encontrado</span>
         )}
       </div>
     </div>

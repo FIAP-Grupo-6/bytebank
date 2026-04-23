@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from '@/components/shared/button';
+import { Button } from '@/components/ui/button';
 import Title from "../ui/title";
 import Text from "../ui/text";
 
@@ -35,17 +35,19 @@ export default function MessageConfirm({
         <div className="flex gap-3 justify-end">
           <Button
             variant="secondary"
-            label={cancelText}
             size="sm"
             onClick={onCancel}
-          />
+          >
+            {cancelText}
+          </Button>
 
           <Button
             variant={isDestructive ? "destructive" : "primary"}
-            label={confirmText}
             size="sm"
             onClick={onConfirm}
-          />
+          >
+            {confirmText}
+          </Button>
         </div>
       </div>
     </div>

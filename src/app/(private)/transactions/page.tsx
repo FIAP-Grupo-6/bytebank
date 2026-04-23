@@ -1,7 +1,7 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { Button } from '@/components/shared/button';
+import { Button } from '@/components/ui/button';
 import Title from "@/components/ui/title";
 import List from "@/components/shared/list";
 import SearchInput from "@/components/ui/search-input";
@@ -36,7 +36,9 @@ export default function Transactions() {
         <div className="flex items-center justify-between">
           <Title>Transações</Title>
 
-          <Button label="Nova transação" icon={Plus} />
+          <Button iconRight={Plus} variant='primary'>
+            Nova transação
+          </Button>
         </div>
 
         {error && (

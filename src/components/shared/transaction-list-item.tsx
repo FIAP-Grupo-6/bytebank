@@ -1,9 +1,9 @@
 import React from "react";
 import { Pencil, Trash2 } from "lucide-react";
-import { Button } from "./button";
+import { ButtonCircle } from "@/components/ui/button-circle";
 import Text from "../ui/text";
 import Title from "../ui/title";
-import { Badge, BadgeProps } from "../ui/badge";
+import { Badge } from "../ui/badge";
 import { Amount } from "../ui/amount";
 import { TransactionIcon } from "./transaction-icon";
 import { Category, categoryMap } from "@/types/category";
@@ -52,23 +52,21 @@ export default function TransactionListItem({
 
         <Amount value={value} />
 
-        <div className="flex items-center gap-1 ml-2">
-          <Button
+        <div className="flex items-center gap-2 ml-2">
+          <ButtonCircle
             variant="secondary"
-            shape="default"
             size="sm"
             icon={Pencil}
+            aria-label="Editar"
             onClick={onEdit}
-            iconClassName="size-4"
           />
 
-          <Button
+          <ButtonCircle
             variant="secondary"
-            shape="default"
             size="sm"
             icon={Trash2}
+            aria-label="Apagar"
             onClick={onDelete}
-            iconClassName="size-4"
           />
         </div>
       </div>

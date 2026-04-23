@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "./button";
+import { Button } from "@/components/ui/button"
 
 interface FilterOption {
   label: string;
@@ -23,7 +23,6 @@ export default function FilterButtons({
         <Button
           key={f.value}
           variant="secondary"
-          label={f.label}
           size="sm"
           onClick={() => onChange(f.value)}
           className={`
@@ -34,7 +33,9 @@ export default function FilterButtons({
                 : "bg-muted text-muted-foreground border-border hover:bg-surface-hover"
             }
           `}
-        />
+        >
+          {f.label}
+        </Button>
       ))}
     </div>
   );

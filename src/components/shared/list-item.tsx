@@ -21,7 +21,7 @@ export default function ListItem({
   onDelete,
 }: ListItemProps) {
   const formattedDate = new Date(date).toLocaleDateString("pt-BR");
-  const formattedCurrency = value.toLocaleString("pt-BR", {
+  const formattedCurrency = value?.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
   });

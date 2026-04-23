@@ -1,55 +1,64 @@
-import { useState, useCallback } from 'react';
-import { Transaction, TransactionFormData } from '../transaction.types';
-import { transactionService } from '../transaction.service';
+import { useState, useCallback, useEffect } from 'react';
+import { TransactionFormData } from '../transaction.types';
+import { transactionService } from '@/domain/Transaction';
+import { Transaction } from '@/types/transaction.ts';
 
 export function useTransactionFormViewModel(initialTransaction?: Transaction) {
   const [type, setType] = useState<TransactionFormData['type']>(
-    initialTransaction?.type || 'expense'
+    initialTransaction?.type || 'deposito'
   );
   const [description, setDescription] = useState(initialTransaction?.description || '');
-  const [amount, setAmount] = useState(initialTransaction?.amount.toString() || '');
+  const [value, setValue] = useState(initialTransaction?.value || 0);
   const [date, setDate] = useState(initialTransaction?.date || '');
   const [category, setCategory] = useState<TransactionFormData['category']>(
-    initialTransaction?.category || 'other'
+    initialTransaction?.category || 'outros'
   );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    setType(initialTransaction?.type || 'deposito');
+    setDescription(initialTransaction?.description || '');
+    setValue(initialTransaction?.value || 0);
+    setDate(initialTransaction?.date || '');
+    setCategory(initialTransaction?.category || 'outros');
+    setError(null);
+  }, [initialTransaction]);
+
   const handleSubmit = useCallback(
-    async (onSuccess?: () => void) => {
+    async (onSuccess?: (savedTransaction: Transaction) => void) => {
       setIsLoading(true);
       setError(null);
       try {
         const formData: TransactionFormData = {
           type,
           description,
-          amount,
+          value,
           date,
           category,
         };
 
-        if (initialTransaction?.id) {
-          await transactionService.updateTransaction(initialTransaction.id, formData);
-        } else {
-          await transactionService.createTransaction(formData);
-        }
+        const savedTransaction = initialTransaction?.id
+          ? await transactionService.update(initialTransaction.id, formData)
+          : await transactionService.create(formData);
 
-        onSuccess?.();
+        onSuccess?.(savedTransaction);
+        return savedTransaction;
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Erro ao salvar');
       } finally {
         setIsLoading(false);
       }
     },
-    [type, description, amount, date, category, initialTransaction?.id]
+    [type, description, value, date, category, initialTransaction?.id]
   );
 
   const reset = useCallback(() => {
-    setType(initialTransaction?.type || 'expense');
+    setType(initialTransaction?.type || 'deposito');
     setDescription(initialTransaction?.description || '');
-    setAmount(initialTransaction?.amount.toString() || '');
+    setValue(initialTransaction?.value || 0);
     setDate(initialTransaction?.date || '');
-    setCategory(initialTransaction?.category || 'other');
+    setCategory(initialTransaction?.category || 'outros');
     setError(null);
   }, [initialTransaction]);
 
@@ -58,8 +67,8 @@ export function useTransactionFormViewModel(initialTransaction?: Transaction) {
     setType,
     description,
     setDescription,
-    amount,
-    setAmount,
+    value,
+    setValue,
     date,
     setDate,
     category,

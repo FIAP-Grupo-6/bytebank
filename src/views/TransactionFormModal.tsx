@@ -1,25 +1,27 @@
 'use client';
 
 import { useTransactionFormViewModel } from '@/domain/Transaction/useCases/TransactionFormViewModel';
-import { Transaction } from '@/domain/Transaction/transaction.types';
 import Modal from '@/components/shared/modal';
 import { useState } from 'react';
+import { Transaction } from '@/types/transaction.ts';
+import { Button } from '@/components/shared/button.tsx';
 
 interface TransactionFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   transaction?: Transaction;
+  onSaved?: (savedTransaction: Transaction) => void | Promise<void>;
 }
 
 const TRANSACTION_TYPES = [
-  { value: 'income', label: 'Entrada', icon: '📥' },
-  { value: 'expense', label: 'Saída', icon: '📤' },
-  { value: 'transfer', label: 'Transferência', icon: '🔄' },
+  { value: 'deposito', label: 'Entrada', icon: '📥' },
+  { value: 'pagamento', label: 'Saída', icon: '📤' },
+  { value: 'transferencia', label: 'Transferência', icon: '🔄' },
 ];
 
 const CATEGORIES = ['salary', 'food', 'transport', 'entertainment', 'other'];
 
-export function TransactionFormModal({ isOpen, onClose, transaction }: TransactionFormModalProps) {
+export function TransactionFormModal({ isOpen, onClose, transaction, onSaved }: TransactionFormModalProps) {
   const vm = useTransactionFormViewModel(transaction);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -32,7 +34,7 @@ export function TransactionFormModal({ isOpen, onClose, transaction }: Transacti
       setSubmitError('Descrição é obrigatória');
       return;
     }
-    if (!vm.amount || parseFloat(vm.amount) <= 0) {
+    if (!vm.value || vm.value <= 0) {
       setSubmitError('Valor deve ser maior que 0');
       return;
     }
@@ -41,8 +43,9 @@ export function TransactionFormModal({ isOpen, onClose, transaction }: Transacti
       return;
     }
 
-    await vm.handleSubmit(() => {
+    await vm.handleSubmit((savedTransaction) => {
       vm.reset();
+      onSaved?.(savedTransaction)
       onClose();
     });
   };
@@ -96,8 +99,8 @@ export function TransactionFormModal({ isOpen, onClose, transaction }: Transacti
               type="number"
               step="0.01"
               min="0.01"
-              value={vm.amount}
-              onChange={(e) => vm.setAmount(e.target.value)}
+              value={vm.value}
+              onChange={(e) => vm.setValue(e.target.value === '' ? 0 : Number(e.target.value))}
               placeholder="0,00"
               className="w-full bg-transparent border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground min-h-[44px] focus:outline-none focus:border-ring focus:ring-[3px] focus:ring-ring/20 transition-all"
             />
@@ -138,20 +141,24 @@ export function TransactionFormModal({ isOpen, onClose, transaction }: Transacti
 
         {/* Actions */}
         <div className="flex gap-3 pt-2">
-          <button
+          <Button
+            shape="default"
+            label="Cancelar"
+            variant="secondary"
             type="button"
             onClick={onClose}
             className="flex-1 px-4 py-2.5 rounded-lg text-sm font-medium text-muted-foreground border border-border hover:bg-muted transition-colors min-h-[44px]"
-          >
-            Cancelar
-          </button>
-          <button
+          ></Button>
+          <Button
+            shape="default"
+            label={
+              vm.isLoading ? 'Salvando...' : vm.isEdit ? 'Salvar Alterações' : 'Salvar Transação'
+            }
             type="submit"
             disabled={vm.isLoading}
             className="flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 transition-colors min-h-[44px]"
           >
-            {vm.isLoading ? 'Salvando...' : vm.isEdit ? 'Salvar Alterações' : 'Salvar Transação'}
-          </button>
+          </Button>
         </div>
       </form>
     </Modal>

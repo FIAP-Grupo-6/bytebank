@@ -5,6 +5,7 @@ import Modal from '@/components/shared/modal';
 import { useState } from 'react';
 import { Transaction } from '@/types/transaction.ts';
 import { Button } from '@/components/shared/button.tsx';
+import { Input } from '@/components/ui/input.tsx';
 
 interface TransactionFormModalProps {
   isOpen: boolean;
@@ -18,8 +19,6 @@ const TRANSACTION_TYPES = [
   { value: 'pagamento', label: 'Saída', icon: '📤' },
   { value: 'transferencia', label: 'Transferência', icon: '🔄' },
 ];
-
-const CATEGORIES = ['salary', 'food', 'transport', 'entertainment', 'other'];
 
 export function TransactionFormModal({ isOpen, onClose, transaction, onSaved }: TransactionFormModalProps) {
   const vm = useTransactionFormViewModel(transaction);
@@ -57,7 +56,6 @@ export function TransactionFormModal({ isOpen, onClose, transaction, onSaved }: 
       title={vm.isEdit ? 'Editar Transação' : 'Nova Transação'}
     >
       <form onSubmit={handleFormSubmit} className="space-y-5">
-        {/* Type selector */}
         <div>
           <label className="text-micro text-muted-foreground mb-2 block">Tipo</label>
           <div className="grid grid-cols-3 gap-2">
@@ -82,12 +80,11 @@ export function TransactionFormModal({ isOpen, onClose, transaction, onSaved }: 
         {/* Description */}
         <div>
           <label className="text-micro text-muted-foreground mb-2 block">Descrição</label>
-          <input
+          <Input
             type="text"
             value={vm.description}
             onChange={(e) => vm.setDescription(e.target.value)}
             placeholder="Ex: Almoço com a equipe"
-            className="w-full bg-transparent border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground min-h-[44px] focus:outline-none focus:border-ring focus:ring-[3px] focus:ring-ring/20 transition-all"
           />
         </div>
 
@@ -95,41 +92,30 @@ export function TransactionFormModal({ isOpen, onClose, transaction, onSaved }: 
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="text-micro text-muted-foreground mb-2 block">Valor (R$)</label>
-            <input
+            <Input
               type="number"
               step="0.01"
               min="0.01"
               value={vm.value}
               onChange={(e) => vm.setValue(e.target.value === '' ? 0 : Number(e.target.value))}
               placeholder="0,00"
-              className="w-full bg-transparent border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground min-h-[44px] focus:outline-none focus:border-ring focus:ring-[3px] focus:ring-ring/20 transition-all"
             />
           </div>
           <div>
             <label className="text-micro text-muted-foreground mb-2 block">Data</label>
-            <input
-              type="date"
-              value={vm.date}
-              onChange={(e) => vm.setDate(e.target.value)}
-              className="w-full bg-transparent border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground min-h-[44px] focus:outline-none focus:border-ring focus:ring-[3px] focus:ring-ring/20 transition-all [color-scheme:dark]"
-            />
+            <Input type="date" value={vm.date} onChange={(e) => vm.setDate(e.target.value)} />
           </div>
         </div>
 
         {/* Category */}
         <div>
           <label className="text-micro text-muted-foreground mb-2 block">Categoria</label>
-          <select
+          <Input
+            type="text"
             value={vm.category}
-            onChange={(e) => vm.setCategory(e.target.value as any)}
-            className="w-full bg-transparent border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground min-h-[44px] focus:outline-none focus:border-ring focus:ring-[3px] focus:ring-ring/20 transition-all"
-          >
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c} className="bg-card">
-                {c.charAt(0).toUpperCase() + c.slice(1)}
-              </option>
-            ))}
-          </select>
+            onChange={(e) => vm.setCategory(e.target.value)}
+            placeholder="Ex: Salário, Alimentação, Transporte..."
+          />
         </div>
 
         {/* Error message */}
@@ -157,8 +143,7 @@ export function TransactionFormModal({ isOpen, onClose, transaction, onSaved }: 
             type="submit"
             disabled={vm.isLoading}
             className="flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 transition-colors min-h-[44px]"
-          >
-          </Button>
+          ></Button>
         </div>
       </form>
     </Modal>

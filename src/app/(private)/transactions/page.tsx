@@ -71,9 +71,9 @@ export default function Transactions() {
                 <TransactionListItem
                   description={transaction.description}
                   date={transaction.date}
-                  category={transaction.category}
                   value={transaction.value}
                   type={transaction.type}
+                  category={transaction.category}
                   onEdit={() => console.log("Editar", transaction.id)}
                   onDelete={() => handleDeleteClick(transaction.id, transaction.description)}
                 />

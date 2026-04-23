@@ -1,9 +1,7 @@
+import { formatCurrency } from "@/utils/formatters"
+
 interface AmountProps extends React.HTMLAttributes<HTMLDivElement> {
   value: number;
-}
-
-function formatCurrency(value: number) {
-  return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: 2 }).format(value);
 }
 
 export function Amount({ value, className = "", ...props }: AmountProps) {
@@ -19,7 +17,7 @@ export function Amount({ value, className = "", ...props }: AmountProps) {
       className={`text-sm font-semibold ${variant} ${className}`}
       {...props}
     >
-      {formatCurrency(value)}
+      {formatCurrency(value).formatted}
     </div>
   );
 }

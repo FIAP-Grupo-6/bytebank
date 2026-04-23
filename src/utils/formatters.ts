@@ -47,3 +47,17 @@ export function formatCurrency(
     formatted,
   };
 }
+
+type FormatDateOptions = {
+  locale?: string;
+  options?: Intl.DateTimeFormatOptions;
+}
+
+export function formatDate(
+  date: string | Date,
+  { locale = "pt-BR", options = { day: "numeric", month: "short" } }: FormatDateOptions = {}
+): string {
+  const parsedDate = new Date(date);
+
+  return parsedDate.toLocaleDateString(locale, options);
+}

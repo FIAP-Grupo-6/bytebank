@@ -9,29 +9,63 @@ const meta: Meta<typeof Button> = {
 
   args: {
     children: "Button",
+    variant: "primary",
+    size: "md",
+    full: false,
   },
 
   argTypes: {
     variant: {
       control: "select",
-      options: ["primary", "secondary", "destructive", "outline", "ghost", "link"],
+      options: ["primary", "secondary", "destructive", "ghost", "link"],
+      description: "Define o estilo visual do botão",
+      table: {
+        defaultValue: { summary: "primary" },
+      },
     },
 
     size: {
       control: "select",
       options: ["sm", "md", "lg"],
+      description: "Define o tamanho do botão",
+      table: {
+        defaultValue: { summary: "md" },
+      },
     },
 
     full: {
       control: "boolean",
+      description: "Faz o botão ocupar 100% da largura",
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
+
+    iconLeft: { 
+      control: "select",
+      options: ["mail", "arrow", "check"],
+      mapping: {
+        mail: Mail,
+        arrow: ArrowRight,
+        check: Check,
+      },
+      description: "Ícone exibido à esquerda"
+    },
+
+    iconRight: { 
+      control: "select",
+      options: ["mail", "arrow", "check"],
+      mapping: {
+        mail: Mail,
+        arrow: ArrowRight,
+        check: Check,
+      },
+      description: "Ícone exibido à direita",
     },
 
     asChild: {
       table: { disable: true },
     },
-
-    iconLeft: { control: false },
-    iconRight: { control: false },
   },
 };
 
@@ -54,13 +88,6 @@ export const Destructive: Story = {
   args: {
     variant: "destructive",
     children: "Destructive",
-  },
-};
-
-export const Outline: Story = {
-  args: {
-    variant: "outline",
-    children: "Outline",
   },
 };
 

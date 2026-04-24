@@ -8,9 +8,9 @@ const buttonCircleVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-primary text-primary-foreground hover:brightness-110",
-        secondary: "bg-muted text-muted-foreground hover:bg-accent",
-        destructive: "bg-destructive text-destructive-foreground hover:brightness-110",
+        primary: "bg-primary text-primary-foreground hover:brightness-110 active:brightness-95",
+        secondary: "bg-muted text-muted-foreground hover:bg-accent hover:text-foreground",
+        destructive: "bg-destructive text-destructive-foreground hover:brightness-110 active:brightness-95",
         ghost: "hover:bg-accent hover:text-accent-foreground",
       },
       size: {

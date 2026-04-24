@@ -14,7 +14,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["primary", "secondary", "destructive", "outline", "ghost", "link"],
+      options: ["primary", "secondary", "destructive", "ghost", "link"],
     },
 
     size: {
@@ -54,13 +54,6 @@ export const Destructive: Story = {
   args: {
     variant: "destructive",
     children: "Destructive",
-  },
-};
-
-export const Outline: Story = {
-  args: {
-    variant: "outline",
-    children: "Outline",
   },
 };
 

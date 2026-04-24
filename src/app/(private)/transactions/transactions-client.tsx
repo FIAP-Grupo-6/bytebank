@@ -57,7 +57,7 @@ export default function TransactionsClient({ initialTransactions }: Props) {
             <div className="space-y-6">
 
                 <div className="flex items-center justify-between">
-                    <Title>Transações</Title>
+                    <Title size="h2">Transações</Title>
                     <Button iconLeft={Plus}>Nova transação</Button>
                 </div>
 

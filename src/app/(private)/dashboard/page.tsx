@@ -13,7 +13,7 @@ export default async function Dashboard() {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between">
-        <Title>Bem-vindo, Usuário</Title>
+        <Title size="h2">Bem-vindo, Usuário</Title>
         <Button className="hidden md:inline-flex" iconLeft={Plus}>Nova transação</Button>
       </div>
 

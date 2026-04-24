@@ -1,172 +1,164 @@
 {
   "transactions": [
     {
-      "type": "pagamento",
-      "description": "Transferência Joãosss",
-      "value": 1,
-      "date": "2026-04-24",
-      "category": "Transferênciadsadasd",
-      "id": 3
+      "id": 1,
+      "description": "Transferência João",
+      "date": "2026-04-02",
+      "category": "other",
+      "value": -200,
+      "type": "transferencia"
     },
     {
-      "type": "deposito",
-      "description": "Freelancer - Projeto Webs",
-      "value": 1500,
+      "id": 2,
+      "description": "Freelancer - Projeto Web",
       "date": "2026-04-07",
-      "category": "Renda",
-      "id": 5
+      "category": "salary",
+      "value": 1500,
+      "type": "deposito"
     },
     {
-      "id": 6,
+      "id": 3,
       "description": "Gasolina",
       "date": "2026-04-06",
-      "category": "Transporte",
+      "category": "transport",
       "value": -120,
       "type": "pagamento"
     },
     {
-      "id": 7,
+      "id": 4,
       "description": "Saque em caixa eletrônico",
       "date": "2026-04-04",
-      "category": "Saque",
+      "category": "other",
       "value": -300,
       "type": "saque"
     },
     {
-      "id": 8,
+      "id": 5,
       "description": "Restaurante Italiano",
       "date": "2026-04-03",
-      "category": "Alimentação",
+      "category": "food",
       "value": -85.5,
       "type": "pagamento"
     },
     {
-      "id": 10,
+      "id": 6,
       "description": "Devolução de Compra",
       "date": "2026-03-31",
-      "category": "Reembolso",
+      "category": "other",
       "value": 250,
       "type": "deposito"
     },
     {
-      "id": 11,
+      "id": 7,
       "description": "Supermercado Carrefour",
       "date": "2026-04-08",
-      "category": "Alimentação",
+      "category": "food",
       "value": -234.9,
       "type": "pagamento"
     },
     {
-      "id": 12,
+      "id": 8,
       "description": "Salário Mensal",
       "date": "2026-04-01",
-      "category": "Renda",
+      "category": "salary",
       "value": 5000,
       "type": "deposito"
     },
     {
-      "id": 13,
+      "id": 9,
       "description": "Conta de Luz",
       "date": "2026-04-05",
-      "category": "Utilidades",
+      "category": "housing",
       "value": -189.45,
       "type": "pagamento"
     },
     {
-      "id": 14,
+      "id": 10,
       "description": "Transferência para Maria",
       "date": "2026-04-06",
-      "category": "Transferência",
+      "category": "other",
       "value": -500,
       "type": "transferencia"
     },
     {
-      "id": 15,
+      "id": 11,
       "description": "Cinema - Ingresso",
       "date": "2026-04-07",
-      "category": "Lazer",
+      "category": "leisure",
       "value": -60,
       "type": "pagamento"
     },
     {
-      "id": 16,
+      "id": 12,
       "description": "Saque em caixa",
       "date": "2026-04-08",
-      "category": "Saque",
+      "category": "other",
       "value": -200,
       "type": "saque"
     },
     {
-      "id": 17,
+      "id": 13,
       "description": "Farmácia Genérico",
       "date": "2026-04-09",
-      "category": "Saúde",
+      "category": "health",
       "value": -95.3,
       "type": "pagamento"
     },
     {
-      "id": 18,
+      "id": 14,
       "description": "Consulta Odontológica",
       "date": "2026-04-10",
-      "category": "Saúde",
+      "category": "health",
       "value": -350,
       "type": "pagamento"
     },
     {
-      "id": 19,
+      "id": 15,
       "description": "Streaming Netflix",
       "date": "2026-04-01",
-      "category": "Entretenimento",
+      "category": "leisure",
       "value": -39.9,
       "type": "pagamento"
     },
     {
-      "id": 20,
+      "id": 16,
       "description": "Compra Amazon",
       "date": "2026-04-06",
-      "category": "Compras",
+      "category": "other",
       "value": -156.75,
       "type": "pagamento"
     },
     {
-      "id": 21,
+      "id": 17,
       "description": "Bônus Anual",
       "date": "2026-03-28",
-      "category": "Renda",
+      "category": "salary",
       "value": 2000,
       "type": "deposito"
     },
     {
-      "id": 22,
+      "id": 18,
       "description": "Aluguel Apartamento",
       "date": "2026-04-01",
-      "category": "Habitação",
+      "category": "housing",
       "value": -1200,
       "type": "pagamento"
     },
     {
-      "id": 23,
+      "id": 19,
       "description": "Uber para trabalho",
       "date": "2026-04-05",
-      "category": "Transporte",
+      "category": "transport",
       "value": -45.8,
       "type": "pagamento"
     },
     {
-      "id": 24,
+      "id": 20,
       "description": "Clube de Futebol",
       "date": "2026-04-01",
-      "category": "Esportes",
+      "category": "leisure",
       "value": -120,
       "type": "pagamento"
-    },
-    {
-      "type": "deposito",
-      "description": "Coisa boa",
-      "value": 12,
-      "date": "2026-05-01",
-      "category": "food",
-      "id": 25
     }
   ]
 }

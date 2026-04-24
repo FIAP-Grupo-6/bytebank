@@ -61,7 +61,7 @@ type ButtonProps = ButtonBaseProps &
     icon?: LucideIcon;
     iconPosition?: 'left' | 'right';
     iconClassName?: string;
-  } & ({ shape?: 'default'; label: string } | { shape: 'circle'; 'aria-label': string });
+  } & ({ shape?: 'default'; label?: string } | { shape: 'circle'; 'aria-label': string });
 
 function Button({
   className,

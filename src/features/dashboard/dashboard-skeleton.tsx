@@ -4,8 +4,8 @@ export function DashboardSkeleton() {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex justify-between">
-        <Skeleton className="h-12 w-40" />
-        <Skeleton className="h-12 w-32" />
+        <Skeleton className="h-11 w-40" />
+        <Skeleton className="h-11 w-32" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 py-2">

@@ -18,6 +18,7 @@ const TRANSACTION_TYPES = [
   { value: 'deposito', label: 'Entrada', icon: '📥' },
   { value: 'pagamento', label: 'Saída', icon: '📤' },
   { value: 'transferencia', label: 'Transferência', icon: '🔄' },
+  { value: 'saque', label: 'Saque', icon: '💰' },
 ];
 
 export function TransactionFormModal({ isOpen, onClose, transaction, onSaved }: TransactionFormModalProps) {
@@ -58,7 +59,7 @@ export function TransactionFormModal({ isOpen, onClose, transaction, onSaved }: 
       <form onSubmit={handleFormSubmit} className="space-y-5">
         <div>
           <label className="text-micro text-muted-foreground mb-2 block">Tipo</label>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-4 gap-2">
             {TRANSACTION_TYPES.map((t) => (
               <button
                 key={t.value}

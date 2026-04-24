@@ -159,6 +159,22 @@
       "category": "leisure",
       "value": -120,
       "type": "pagamento"
+    },
+    {
+      "type": "deposito",
+      "description": "Teste",
+      "value": 10,
+      "date": "2026-04-24",
+      "category": "outros",
+      "id": 21
+    },
+    {
+      "type": "deposito",
+      "description": "Coisa boa",
+      "value": 20,
+      "date": "2026-04-24",
+      "category": "outros",
+      "id": 22
     }
   ]
 }

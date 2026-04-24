@@ -11,7 +11,7 @@ export function useTransactionFormViewModel(initialTransaction?: Transaction) {
   const [value, setValue] = useState(initialTransaction?.value || 0);
   const [date, setDate] = useState(initialTransaction?.date || '');
   const [category, setCategory] = useState<TransactionFormData['category']>(
-    initialTransaction?.category || 'outros'
+    initialTransaction?.category || 'Outros'
   );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +21,7 @@ export function useTransactionFormViewModel(initialTransaction?: Transaction) {
     setDescription(initialTransaction?.description || '');
     setValue(initialTransaction?.value || 0);
     setDate(initialTransaction?.date || '');
-    setCategory(initialTransaction?.category || 'outros');
+    setCategory(initialTransaction?.category || 'Outros');
     setError(null);
   }, [initialTransaction]);
 
@@ -58,7 +58,7 @@ export function useTransactionFormViewModel(initialTransaction?: Transaction) {
     setDescription(initialTransaction?.description || '');
     setValue(initialTransaction?.value || 0);
     setDate(initialTransaction?.date || '');
-    setCategory(initialTransaction?.category || 'outros');
+    setCategory(initialTransaction?.category || 'Outros');
     setError(null);
   }, [initialTransaction]);
 

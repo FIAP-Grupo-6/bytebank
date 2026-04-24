@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import { Search } from "lucide-react";
 
 interface SearchInputProps {
@@ -12,15 +12,24 @@ export default function SearchInput({
   onChange,
   placeholder = "Buscar...",
 }: SearchInputProps) {
+  const id = useId();
+
   return (
     <div className="relative">
+      <label htmlFor={id} className="sr-only">
+        {placeholder}
+      </label>
+
       <Search
         size={16}
+        aria-hidden="true"
         className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
       />
 
       <input
-        type="text"
+        id={id}
+        type="search"
+        role="searchbox"
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}

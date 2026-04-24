@@ -1,3 +1,4 @@
+import React from "react";
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
 import { type LucideIcon } from 'lucide-react';
@@ -8,7 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: 'bg-primary text-primary-foreground hover:brightness-110 active:brightness-95',
-        secondary: 'bg-transparent text-muted-foreground hover:bg-muted hover:text-foreground',
+        secondary: 'bg-transparent text-foreground hover:bg-muted hover:text-foreground',
         destructive:
           'bg-destructive text-destructive-foreground hover:brightness-110 active:brightness-95',
       },
@@ -59,44 +60,74 @@ type ButtonProps = ButtonBaseProps &
   ButtonCvaProps & {
     label?: string;
     icon?: LucideIcon;
-    iconPosition?: 'left' | 'right';
+    iconPosition?: "left" | "right";
     iconClassName?: string;
-  } & ({ shape?: 'default'; label?: string } | { shape: 'circle'; 'aria-label': string });
-
-function Button({
-  className,
-  variant,
-  shape,
-  size,
-  full,
-  label,
-  icon: Icon,
-  iconPosition = 'left',
-  iconClassName,
-  type,
-  ...props
-}: ButtonProps) {
-  const isCircle = shape === 'circle';
-
-  return (
-    <button
-      type={type ?? 'button'}
-      className={cn(buttonVariants({ variant, shape, size, full }), className)}
-      {...props}
-    >
-      {isCircle ? (
-        Icon && <Icon className={cn('size-6', iconClassName)} />
-      ) : (
-        <>
-          {Icon && iconPosition === 'left' && <Icon className={cn('size-4', iconClassName)} />}
-
-          {label}
-
-          {Icon && iconPosition === 'right' && <Icon className={cn('size-4', iconClassName)} />}
-        </>
-      )}
-    </button>
+  } & (
+    | { shape?: "default"; label?: string }
+    | { shape: "circle"; "aria-label": string }
   );
-}
 
-export { Button, buttonVariants };
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      className,
+      variant,
+      shape,
+      size,
+      full,
+      label,
+      icon: Icon,
+      iconPosition = "left",
+      iconClassName,
+      type,
+      ...props
+    },
+    ref
+  ) => {
+    const isCircle = shape === "circle";
+
+    return (
+      <button
+        ref={ref}
+        type={type ?? "button"}
+        aria-disabled={props.disabled}
+        className={cn(buttonVariants({ variant, shape, size, full }), className)}
+        {...props}
+      >
+        {isCircle ? (
+          Icon && (
+            <Icon
+              aria-hidden="true"
+              focusable="false"
+              className={cn("size-6", iconClassName)}
+            />
+          )
+        ) : (
+          <>
+            {Icon && iconPosition === "left" && (
+              <Icon
+                aria-hidden="true"
+                focusable="false"
+                className={cn("size-4", iconClassName)}
+              />
+            )}
+
+            {label}
+
+            {Icon && iconPosition === "right" && (
+              <Icon
+                aria-hidden="true"
+                focusable="false"
+                className={cn("size-4", iconClassName)}
+              />
+            )}
+          </>
+        )}
+      </button>
+    );
+  }
+);
+
+Button.displayName = "Button";
+
+export { Button };

@@ -18,24 +18,33 @@ export default function FilterButtons({
   onChange,
 }: FilterButtonsProps) {
   return (
-    <div className="flex gap-2 flex-wrap">
-      {filters.map((f) => (
-        <Button
-          key={f.value}
-          variant="secondary"
-          label={f.label}
-          size="sm"
-          onClick={() => onChange(f.value)}
-          className={`
-            px-3 py-1.5 text-sm rounded-md transition-colors border
-            ${
-              selectedValue === f.value
-                ? "bg-primary/10 text-primary border-primary/20"
-                : "bg-muted text-muted-foreground border-border hover:bg-surface-hover"
-            }
-          `}
-        />
-      ))}
+    <div
+      className="flex gap-2 flex-wrap"
+      role="group"
+      aria-label="Filtrar transações"
+    >
+      {filters.map((f) => {
+        const isSelected = selectedValue === f.value;
+
+        return (
+          <Button
+            key={f.value}
+            variant="secondary"
+            label={f.label}
+            size="sm"
+            onClick={() => onChange(f.value)}
+            aria-pressed={isSelected}
+            className={`
+              px-3 py-1.5 text-sm rounded-md transition-colors border
+              ${
+                isSelected
+                  ? "bg-primary/10 text-primary border-primary/20"
+                  : "bg-muted text-foreground border-border hover:bg-surface-hover"
+              }
+            `}
+          />
+        );
+      })}
     </div>
   );
 }

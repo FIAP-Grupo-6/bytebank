@@ -32,19 +32,21 @@ export default function TransactionListItem({
   const configCategory = category ? categoryMap[category] : categoryMap["other"];
 
   return (
-    <div
+    <article
       className="
-        flex items-center justify-between
-        py-3 px-4
-        hover:bg-surface-hover transition-colors cursor-pointer
-      "
+          flex items-center justify-between
+          py-3 px-4
+          hover:bg-surface-hover transition-colors
+        "
     >
       <div className="flex items-center gap-3">
         <TransactionIcon type={type} />
 
         <div className="space-y-1">
-          <Title type="h5">{description}</Title>
-          <Text>{formattedDate}</Text>
+          <Title as="h2" size="h5">{description}</Title>
+          <Text>
+            <time dateTime={date}>{formattedDate}</time>
+          </Text>
         </div>
       </div>
 
@@ -52,13 +54,13 @@ export default function TransactionListItem({
         {category && (
           <Badge type={configCategory.badge}>
             {configCategory.label}
-          </Badge> 
+          </Badge>
         )}
 
-        <Amount value={value} />
+        <Amount value={value} aria-label={`Valor da transação: ${value}`} />
 
         <div className="flex items-center gap-1 ml-2">
-           {onEdit && (
+          {onEdit && (
             <Button
               variant="secondary"
               shape="default"
@@ -66,10 +68,11 @@ export default function TransactionListItem({
               icon={Pencil}
               onClick={onEdit}
               iconClassName="size-4"
+              aria-label={`Editar transação ${description}`}
             />
           )}
 
-          {onDelete && ( 
+          {onDelete && (
             <Button
               variant="secondary"
               shape="default"
@@ -77,10 +80,11 @@ export default function TransactionListItem({
               icon={Trash2}
               onClick={onDelete}
               iconClassName="size-4"
+              aria-label={`Excluir transação ${description}`}
             />
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 }

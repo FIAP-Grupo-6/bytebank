@@ -175,6 +175,14 @@
       "date": "2026-04-24",
       "category": "outros",
       "id": 22
+    },
+    {
+      "type": "deposito",
+      "description": "dsddds",
+      "value": 21221.26,
+      "date": "2026-04-24",
+      "category": "Outros",
+      "id": 23
     }
   ]
 }

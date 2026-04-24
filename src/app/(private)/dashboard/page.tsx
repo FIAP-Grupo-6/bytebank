@@ -1,4 +1,5 @@
-import { Button } from '@/components/shared/button';
+import { Button } from '@/components/ui/button';
+import { ButtonCircle } from '@/components/ui/button-circle'
 import { getDashboardData } from '@/domain/Dashboard/useCases/get-dashboard-data';
 import { BalanceCard } from '@/features/dashboard/balance-card';
 import { Extract } from '@/features/dashboard/extract';
@@ -13,7 +14,7 @@ export default async function Dashboard() {
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between">
         <Title>Bem-vindo, Usuário</Title>
-        <Button className="hidden md:inline-flex" label="Nova transação" icon={Plus} />
+        <Button className="hidden md:inline-flex" iconLeft={Plus}>Nova transação</Button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -27,10 +28,9 @@ export default async function Dashboard() {
 
       <Extract transactions={recentTransactions} />
 
-      <Button
+      <ButtonCircle
         className="fixed bottom-6 right-6 md:hidden shadow-lg"
         icon={Plus}
-        shape="circle"
         size="md"
         aria-label="Nova transação"
       /> 

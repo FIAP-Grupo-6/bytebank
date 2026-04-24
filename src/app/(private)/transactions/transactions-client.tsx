@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
-import { Button } from '@/components/shared/button';
+import { Button } from '@/components/ui/button';
 import Title from "@/components/ui/title";
 import List from "@/components/shared/list";
 import SearchInput from "@/components/ui/search-input";
@@ -58,7 +58,7 @@ export default function TransactionsClient({ initialTransactions }: Props) {
 
                 <div className="flex items-center justify-between">
                     <Title>Transações</Title>
-                    <Button label="Nova transação" icon={Plus} />
+                    <Button iconLeft={Plus}>Nova transação</Button>
                 </div>
 
                 <SearchInput

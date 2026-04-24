@@ -2,7 +2,8 @@ import React from "react";
 
 interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
-  type?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  size?: keyof typeof sizeMap;
 }
 
 const sizeMap = {
@@ -14,11 +15,20 @@ const sizeMap = {
   h6: "text-sm",
 };
 
-export default function Title({ children, type = "h1", className = "", ...props }: TitleProps) {
-  const Component = type;
+export default function Title({
+  children,
+  as = "h1",
+  size = "h1",
+  className = "",
+  ...props
+}: TitleProps) {
+  const Component = as;
 
   return (
-    <Component className={`${sizeMap[type]} font-semibold ${className}`} {...props}>
+    <Component
+      className={`${sizeMap[size]} font-semibold ${className}`}
+      {...props}
+    >
       {children}
     </Component>
   );

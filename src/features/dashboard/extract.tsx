@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Transaction } from '@/types/transaction';
-import { TransactionListItem } from './transaction-list-item';
+import List from "@/components/shared/list";
+import TransactionListItem from "@/components/shared/transaction-list-item";
 
 export function Extract({ transactions }: { transactions: Transaction[] }) {
   const hasTransactions = transactions.length > 0
@@ -16,15 +17,17 @@ export function Extract({ transactions }: { transactions: Transaction[] }) {
         )}
       </div>
 
-      <div className="flex flex-col gap-2">
-        {hasTransactions ? (
-          transactions.map((transaction) => (
-            <TransactionListItem key={transaction.id} transaction={transaction} />
-          ))
-        ) : (
-          <span className="text-center text-sm text-muted-foreground">Nenhum item encontrado</span>
+      <List
+        items={transactions}
+        renderItem={(transaction) => (
+          <TransactionListItem
+            description={transaction.description}
+            date={transaction.date}
+            value={transaction.value}
+            type={transaction.type}
+          />
         )}
-      </div>
+      />
     </div>
   );
 }

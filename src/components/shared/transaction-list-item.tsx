@@ -7,13 +7,14 @@ import { Badge } from "../ui/badge";
 import { Amount } from "../ui/amount";
 import { TransactionIcon } from "./transaction-icon";
 import { Category, categoryMap } from "@/types/category";
+import { formatDate } from "@/utils/formatters"
 
 interface TransactionListItemProps {
   description: string;
   date: string;
-  category: Category;
   value: number;
   type: "deposito" | "pagamento" | "transferencia" | "saque";
+  category?: Category;
   onEdit?: () => void;
   onDelete?: () => void;
 }
@@ -21,55 +22,65 @@ interface TransactionListItemProps {
 export default function TransactionListItem({
   description,
   date,
-  category,
   value,
   type,
+  category,
   onEdit,
   onDelete,
 }: TransactionListItemProps) {
-  const formattedDate = new Date(date).toLocaleDateString("pt-BR", { day: "numeric", month: "short" });
-  const configCategory = categoryMap[category] ?? categoryMap["other"];
+  const formattedDate = formatDate(date);
+  const configCategory = category ? categoryMap[category] : categoryMap["other"];
 
   return (
-    <div
+    <article
       className="
-        flex items-center justify-between
-        py-3 px-4
-        hover:bg-surface-hover transition-colors cursor-pointer
-      "
+          flex items-center justify-between
+          py-3 px-4
+          hover:bg-surface-hover transition-colors
+        "
     >
       <div className="flex items-center gap-3">
         <TransactionIcon type={type} />
 
         <div className="space-y-1">
-          <Title type="h5">{description}</Title>
-          <Text>{formattedDate}</Text>
+          <Title as="h2" size="h5">{description}</Title>
+          <Text>
+            <time dateTime={date}>{formattedDate}</time>
+          </Text>
         </div>
       </div>
 
       <div className="flex items-center gap-3">
-        <Badge type={configCategory.badge}>{configCategory.label}</Badge>
+        {category && (
+          <Badge type={configCategory.badge}>
+            {configCategory.label}
+          </Badge>
+        )}
 
-        <Amount value={value} />
+        <Amount value={value} aria-label={`Valor da transação: ${value}`} />
 
-        <div className="flex items-center gap-2 ml-2">
-          <ButtonCircle
-            variant="secondary"
-            size="sm"
-            icon={Pencil}
-            aria-label="Editar"
-            onClick={onEdit}
-          />
+        <div className="flex items-center gap-1 ml-2">
+          {onEdit && (
+            <ButtonCircle
+              variant="secondary"
+              size="sm"
+              icon={Pencil}
+              onClick={onEdit}
+              aria-label={`Editar transação ${description}`}
+            />
+          )}
 
-          <ButtonCircle
-            variant="secondary"
-            size="sm"
-            icon={Trash2}
-            aria-label="Apagar"
-            onClick={onDelete}
-          />
+          {onDelete && (
+            <ButtonCircle
+              variant="secondary"
+              size="sm"
+              icon={Trash2}
+              onClick={onDelete}
+              aria-label={`Excluir transação ${description}`}
+            />
+          )}
         </div>
       </div>
-    </div>
+    </article>
   );
 }

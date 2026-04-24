@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useId } from "react";
 import { Button } from '@/components/ui/button';
 import Title from "../ui/title";
 import Text from "../ui/text";
@@ -24,16 +24,41 @@ export default function MessageConfirm({
   onConfirm,
   onCancel,
 }: MessageConfirmProps) {
+  const titleId = useId();
+  const descriptionId = useId();
+  const cancelRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      cancelRef.current?.focus();
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-card border border-border rounded-xl p-6 max-w-sm w-full animate-in fade-in slide-in-from-bottom-4">
-        <Title type="h3">{title}</Title>
-        <Text className="mb-6 mt-3">{description}</Text>
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      role="presentation"
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+        className="bg-card border border-border rounded-xl p-6 max-w-sm w-full animate-in fade-in slide-in-from-bottom-4"
+      >
+        <Title id={titleId} size="h3">
+          {title}
+        </Title>
+
+        <Text id={descriptionId} className="mb-6 mt-3">
+          {description}
+        </Text>
 
         <div className="flex gap-3 justify-end">
           <Button
+            ref={cancelRef}
             variant="secondary"
             size="sm"
             onClick={onCancel}

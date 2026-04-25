@@ -34,9 +34,7 @@ export function TransactionIcon({
   if (!Icon) return null;
 
   return (
-    <div
-      className={`p-2 rounded-lg bg-muted text-muted-foreground ${className}`}
-    >
+    <div className="inline-flex items-center justify-center p-0 rounded-full bg-muted text-muted-foreground size-10">
       <Icon size={size} />
     </div>
   );

@@ -1,20 +1,21 @@
 import { Button } from '@/components/ui/button';
-import { ButtonCircle } from '@/components/ui/button-circle'
+import { ButtonCircle } from '@/components/ui/button-circle';
 import { getDashboardData } from '@/domain/Dashboard/useCases/get-dashboard-data';
 import { BalanceCard } from '@/features/dashboard/balance-card';
 import { Extract } from '@/features/dashboard/extract';
 import { SummaryCard } from '@/features/dashboard/summary-card';
 import { Plus } from 'lucide-react';
 import Title from '@/components/ui/title';
+import { NewTransactionButton } from '@/components/shared/new-transaction-button';
 
 export default async function Dashboard() {
-  const { balance, income, expense, recentTransactions } = await getDashboardData()
+  const { balance, income, expense, recentTransactions } = await getDashboardData();
 
   return (
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between">
         <Title size="h2">Bem-vindo, Usuário</Title>
-        <Button className="hidden md:inline-flex" iconLeft={Plus}>Nova transação</Button>
+        <NewTransactionButton />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -33,7 +34,7 @@ export default async function Dashboard() {
         icon={Plus}
         size="md"
         aria-label="Nova transação"
-      /> 
+      />
     </div>
   );
 }

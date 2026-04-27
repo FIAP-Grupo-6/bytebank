@@ -1,5 +1,5 @@
-import React, { useId } from "react";
-import { Search } from "lucide-react";
+import React, { useId } from 'react';
+import { Search } from 'lucide-react';
 
 interface SearchInputProps {
   value: string;
@@ -10,7 +10,7 @@ interface SearchInputProps {
 export default function SearchInput({
   value,
   onChange,
-  placeholder = "Buscar...",
+  placeholder = 'Buscar...',
 }: SearchInputProps) {
   const id = useId();
 
@@ -36,7 +36,7 @@ export default function SearchInput({
         className="
           w-full bg-background border border-border rounded-md
           pl-10 pr-3 py-2 text-sm
-          focus:outline-none focus:ring-2 focus:ring-ring
+          focus:outline-none focus:ring-1 focus:ring-ring
         "
       />
     </div>

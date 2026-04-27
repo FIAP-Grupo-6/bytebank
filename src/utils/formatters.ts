@@ -23,18 +23,28 @@ export function formatCurrency(
     showSign = true,
   } = options;
 
-  const normalizedValue = showSign ? value : Math.abs(value);
+  const absoluteValue = Math.abs(value);
 
   const formatter = new Intl.NumberFormat(locale, {
-    style: 'currency',
+    style: "currency",
     currency,
     minimumFractionDigits,
     maximumFractionDigits,
   });
 
-  const formatted = formatter.format(normalizedValue);
+  const baseFormatted = formatter.format(absoluteValue);
 
-  const parts = formatter.formatToParts(normalizedValue);
+  let formatted = baseFormatted;
+
+  if (showSign) {
+    if (value > 0) {
+      formatted = `+${baseFormatted}`;
+    } else if (value < 0) {
+      formatted = `-${baseFormatted}`;
+    }
+  }
+
+  const parts = formatter.formatToParts(absoluteValue);
 
   const amount = parts
     .filter((part) => part.type !== 'currency')

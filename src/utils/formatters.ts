@@ -36,12 +36,10 @@ export function formatCurrency(
 
   let formatted = baseFormatted;
 
-  if (showSign) {
-    if (value > 0) {
-      formatted = `+${baseFormatted}`;
-    } else if (value < 0) {
-      formatted = `-${baseFormatted}`;
-    }
+  if (showSign && value > 0) {
+    formatted = `+${baseFormatted}`;
+  } else if (value < 0) {
+    formatted = `-${baseFormatted}`;
   }
 
   const parts = formatter.formatToParts(absoluteValue);

@@ -7,7 +7,7 @@ export function BalanceCard({ value }: { value: number }) {
       <CardContent className="px-4 py-2 md:p-4">
         <p className="text-xs text-muted-foreground uppercase tracking-wide mb-4">Saldo atual</p>
         <p className="text-xl sm:text-2xl lg:text-5xl font-bold">
-          {formatCurrency(value).formatted}
+          {formatCurrency(value, { showSign: false }).formatted}
         </p>
         <p className="text-xs text-muted-foreground mt-2">Atualizado agora</p>
       </CardContent>

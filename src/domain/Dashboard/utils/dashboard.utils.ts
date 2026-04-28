@@ -18,10 +18,7 @@ export function calculateDashboardMetrics(transactions: Transaction[]) {
   return { balance, income, expense };
 }
 
-export function getRecentTransactions(
-  transactions: Transaction[],
-  limit = 6
-) {
+export function getRecentTransactions(transactions: Transaction[], limit = 10) {
   return transactions
     .slice()
     .sort((a, b) => b.date.localeCompare(a.date))

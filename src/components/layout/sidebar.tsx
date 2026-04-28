@@ -18,22 +18,26 @@ import { Logo } from './logo';
 export function AppSidebar() {
   const pathname = usePathname();
 
-  const isRouteActive = (href: string) => pathname === href
+  const isRouteActive = (href: string) => pathname === href;
 
   return (
     <Sidebar variant="sidebar" collapsible="icon" side="left">
-      <SidebarHeader className="p-4">
+      <SidebarHeader className="pt-10 pb-4 px-4">
         <Link href={'/dashboard'} aria-label="Home">
           <Logo />
         </Link>
       </SidebarHeader>
-      <Separator />
       <SidebarContent className="py-2">
-        <SidebarGroup>
-          <SidebarMenu className="gap-2">
+        <SidebarGroup className="px-3">
+          <SidebarMenu className="gap-1">
             {navItems.map(({ href, label, icon: Icon }) => (
               <SidebarMenuItem key={href}>
-                <SidebarMenuButton tooltip={label} isActive={isRouteActive(href)} asChild>
+                <SidebarMenuButton
+                  tooltip={label}
+                  isActive={isRouteActive(href)}
+                  className="px-4 py-5 hover:text-green-500 data-[active=true]:text-green-500"
+                  asChild
+                >
                   <Link href={href} aria-label={label}>
                     <Icon />
                     <span>{label}</span>

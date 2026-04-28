@@ -20,7 +20,7 @@
     --secondary-foreground: 215 20% 90%;
 
     --muted: 220 10% 18%;
-    --muted-foreground: 215 15% 55%;
+    --muted-foreground: 215 20% 70%;
 
     --accent: 220 14% 14%;
     --accent-foreground: 215 20% 90%;
@@ -38,7 +38,7 @@
     --radius: 0.5rem;
 
     --surface: 220 14% 10%;
-    --surface-hover: 220 14% 12%;
+    --surface-hover: 220 14% 16%;
 
     --sidebar-background: 220 14% 6%;
     --sidebar-foreground: 215 15% 65%;

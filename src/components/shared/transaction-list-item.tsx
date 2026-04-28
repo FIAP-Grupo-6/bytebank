@@ -1,4 +1,3 @@
-import React from 'react';
 import { Pencil, Trash2 } from 'lucide-react';
 import { ButtonCircle } from '@/components/ui/button-circle';
 import Text from '../ui/text';
@@ -8,14 +7,14 @@ import { Amount } from '../ui/amount';
 import { TransactionIcon } from './transaction-icon';
 import { Category, categoryMap } from '@/types/category';
 import { formatDate } from '@/utils/formatters';
-import { TransactionType } from '../types';
+import { TransactionType } from '@/types/transaction';
 
 interface TransactionListItemProps {
   description: string;
   date: string;
   value: number;
   type: TransactionType;
-  category?: Category;
+  category?: string;
   onEdit?: () => void;
   onDelete?: () => void;
 }
@@ -30,7 +29,8 @@ export default function TransactionListItem({
   onDelete,
 }: TransactionListItemProps) {
   const formattedDate = formatDate(date);
-  const configCategory = category ? categoryMap[category] : categoryMap['other'];
+  const configCategory =
+    (category && categoryMap[category as Category]) || categoryMap['other'];
 
   return (
     <article

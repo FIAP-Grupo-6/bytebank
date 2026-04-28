@@ -1,4 +1,4 @@
-import { Category } from "./category";
+export type TransactionType = 'deposito' | 'pagamento' | 'transferencia' | 'saque';
 
 export interface Transaction {
   id: number;
@@ -6,5 +6,5 @@ export interface Transaction {
   date: string;
   category: string;
   value: number;
-  type: "deposito" | "pagamento" | "transferencia" | "saque";
+  type: TransactionType;
 }

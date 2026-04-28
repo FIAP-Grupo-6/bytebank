@@ -1,6 +1,5 @@
-import { Category } from '@/types/category.ts';
-
-export type TransactionType = 'deposito' | 'pagamento' | 'transferencia' | 'saque';
+import { Category } from '@/types/category';
+import { TransactionType } from '@/types/transaction';
 
 export interface TransactionFormData {
   type: TransactionType;

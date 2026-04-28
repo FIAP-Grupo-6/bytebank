@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { transactionViewModel } from "@/domain/Transaction";
+import { useState } from 'react';
+import { transactionViewModel } from '@/domain/Transaction';
 
 interface DeleteConfirm {
   id: number;
@@ -8,7 +8,6 @@ interface DeleteConfirm {
 
 export function useDeleteTransaction(onSuccess: () => Promise<void>) {
   const [deleteConfirm, setDeleteConfirm] = useState<DeleteConfirm | null>(null);
-  const [deleting, setDeleting] = useState(false);
 
   const handleDeleteClick = (id: number, description: string) => {
     setDeleteConfirm({ id, description });
@@ -17,16 +16,9 @@ export function useDeleteTransaction(onSuccess: () => Promise<void>) {
   const handleConfirmDelete = async () => {
     if (!deleteConfirm) return;
 
-    try {
-      setDeleting(true);
-      await transactionViewModel.delete(deleteConfirm.id);
-      setDeleteConfirm(null);
-      await onSuccess();
-    } catch (err) {
-      console.error("Erro ao deletar transação:", err);
-    } finally {
-      setDeleting(false);
-    }
+    await transactionViewModel.delete(deleteConfirm.id);
+    setDeleteConfirm(null);
+    await onSuccess();
   };
 
   const handleCancelDelete = () => {
@@ -35,7 +27,6 @@ export function useDeleteTransaction(onSuccess: () => Promise<void>) {
 
   return {
     deleteConfirm,
-    deleting,
     handleDeleteClick,
     handleConfirmDelete,
     handleCancelDelete,

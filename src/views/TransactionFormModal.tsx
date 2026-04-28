@@ -3,10 +3,10 @@
 import { useTransactionFormViewModel } from '@/domain/Transaction/useCases/TransactionFormViewModel';
 import Modal from '@/components/shared/modal';
 import { useState } from 'react';
-import { Transaction } from '@/types/transaction.ts';
-import { Input } from '@/components/ui/input.tsx';
+import { Transaction, TransactionType } from '@/types/transaction';
+import { Input } from '@/components/ui/input';
 import { ArrowLeftRight, Banknote, CreditCard, Download, type LucideIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button.tsx';
+import { Button } from '@/components/ui/button';
 
 interface TransactionFormModalProps {
   isOpen: boolean;
@@ -16,7 +16,7 @@ interface TransactionFormModalProps {
 }
 
 const TRANSACTION_TYPES: Array<{
-  value: 'deposito' | 'pagamento' | 'transferencia' | 'saque';
+  value: TransactionType;
   label: string;
   icon: LucideIcon;
 }> = [
@@ -81,7 +81,7 @@ export function TransactionFormModal({
                     name="type"
                     value={t.value}
                     checked={vm.type === t.value}
-                    onChange={(e) => vm.setType(e.target.value as any)}
+                    onChange={(e) => vm.setType(e.target.value as TransactionType)}
                     className="sr-only"
                     aria-label={t.label}
                     required
@@ -143,12 +143,10 @@ export function TransactionFormModal({
               placeholder="0,00"
               required
               aria-required="true"
-              aria-invalid={(!vm.value) && !!submitError}
-              aria-describedby={
-                !vm.value || !!submitError ? 'value-error' : undefined
-              }
+              aria-invalid={!vm.value && !!submitError}
+              aria-describedby={!vm.value || !!submitError ? 'value-error' : undefined}
             />
-            {(!vm.value) && !!submitError && (
+            {!vm.value && !!submitError && (
               <p id="value-error" role="alert" className="text-red-500 text-sm mt-1">
                 Valor é obrigatório
               </p>
@@ -213,7 +211,7 @@ export function TransactionFormModal({
           <Button
             type="submit"
             disabled={vm.isLoading}
-            className="flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 transition-colors min-h-[44px]"
+            className="flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 transition-colors min-h-[44px] text-white"
           >
             {vm.isLoading ? 'Salvando...' : vm.isEdit ? 'Salvar Alterações' : 'Salvar Transação'}
           </Button>

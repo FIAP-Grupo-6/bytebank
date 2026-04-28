@@ -1,10 +1,9 @@
 import { Banknote, CreditCard, ArrowLeftRight, Download } from 'lucide-react';
-import { TransactionType } from '../types';
+import { TransactionType } from '@/types/transaction';
 
 interface TransactionIconProps {
   type: TransactionType;
   size?: number;
-  className?: string;
 }
 
 const iconMap = {
@@ -14,7 +13,7 @@ const iconMap = {
   saque: Download,
 };
 
-export function TransactionIcon({ type, size = 16, className = '' }: TransactionIconProps) {
+export function TransactionIcon({ type, size = 16 }: TransactionIconProps) {
   const Icon = iconMap[type];
 
   if (!Icon) return null;

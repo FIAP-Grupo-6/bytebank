@@ -8,8 +8,8 @@ import { ButtonCircle } from '@/components/ui/button-circle';
 import { BalanceCard } from '@/features/dashboard/balance-card';
 import { Extract } from '@/features/dashboard/extract';
 import { SummaryCard } from '@/features/dashboard/summary-card';
-import { Transaction } from '@/types/transaction.ts';
-import { TransactionFormModal } from '@/views/TransactionFormModal.tsx';
+import { Transaction } from '@/types/transaction';
+import { TransactionFormModal } from '@/views/TransactionFormModal';
 import { useRouter } from 'next/navigation';
 
 interface Props {
@@ -23,14 +23,15 @@ export default function DashboardClient({ balance, income, expense, recentTransa
   const router = useRouter();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [transaction, setTransaction] = useState<Transaction | undefined>(undefined);
+
+  const openCreateModal = () => setIsModalOpen(true);
 
   return (
     <div className="flex flex-col gap-8">
       <TransactionFormModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSaved={(_) => {
+        onSaved={() => {
           setIsModalOpen(false);
           router.refresh();
         }}
@@ -39,12 +40,7 @@ export default function DashboardClient({ balance, income, expense, recentTransa
       <div className="flex items-center justify-between">
         <Title size="h2">Bem-vindo, Usuário</Title>
 
-        <NewTransactionButton
-          onClick={() => {
-            setTransaction(undefined);
-            setIsModalOpen(true);
-          }}
-        />
+        <NewTransactionButton onClick={openCreateModal} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -63,10 +59,7 @@ export default function DashboardClient({ balance, income, expense, recentTransa
         icon={Plus}
         size="md"
         aria-label="Nova transação"
-        onClick={() => {
-          setTransaction(undefined);
-          setIsModalOpen(true);
-        }}
+        onClick={openCreateModal}
       />
     </div>
   );

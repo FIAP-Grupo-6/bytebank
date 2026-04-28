@@ -1,14 +1,6 @@
 {
   "transactions": [
     {
-      "id": 1,
-      "description": "Transferência João",
-      "date": "2026-04-02",
-      "category": "other",
-      "value": -200,
-      "type": "transferencia"
-    },
-    {
       "id": 2,
       "description": "Freelancer - Projeto Web",
       "date": "2026-04-07",
@@ -17,12 +9,12 @@
       "type": "deposito"
     },
     {
-      "id": 3,
+      "type": "pagamento",
       "description": "Gasolina",
+      "value": -120,
       "date": "2026-04-06",
       "category": "transport",
-      "value": -120,
-      "type": "pagamento"
+      "id": 3
     },
     {
       "id": 4,
@@ -121,12 +113,12 @@
       "type": "pagamento"
     },
     {
-      "id": 16,
-      "description": "Compra Amazon",
+      "type": "pagamento",
+      "description": "Compra Amazonn",
+      "value": -156.75,
       "date": "2026-04-06",
       "category": "other",
-      "value": -156.75,
-      "type": "pagamento"
+      "id": 16
     },
     {
       "id": 17,
@@ -159,6 +151,94 @@
       "category": "leisure",
       "value": -120,
       "type": "pagamento"
+    },
+    {
+      "type": "deposito",
+      "description": "Teste",
+      "value": 10,
+      "date": "2026-04-24",
+      "category": "outros",
+      "id": 21
+    },
+    {
+      "type": "deposito",
+      "description": "Coisa boa",
+      "value": 20,
+      "date": "2026-04-24",
+      "category": "outros",
+      "id": 22
+    },
+    {
+      "type": "deposito",
+      "description": "dsddds",
+      "value": 21221.26,
+      "date": "2026-04-24",
+      "category": "Outros",
+      "id": 23
+    },
+    {
+      "type": "deposito",
+      "description": "Ala eric",
+      "value": 10,
+      "date": "2026-04-30",
+      "category": "other",
+      "id": 24
+    },
+    {
+      "type": "deposito",
+      "description": "Coisa top",
+      "value": 20,
+      "date": "2026-04-30",
+      "category": "Outros",
+      "id": 25
+    },
+    {
+      "type": "deposito",
+      "description": "afsssss",
+      "value": 20,
+      "date": "2026-04-30",
+      "category": "Outros",
+      "id": 26
+    },
+    {
+      "type": "deposito",
+      "description": "Coisa joia",
+      "value": 1412,
+      "date": "2026-04-29",
+      "category": "Outros",
+      "id": 27
+    },
+    {
+      "type": "deposito",
+      "description": "ala pia bom",
+      "value": 10,
+      "date": "2026-04-30",
+      "category": "Outros",
+      "id": 28
+    },
+    {
+      "type": "deposito",
+      "description": "bbbbbbbbb",
+      "value": 20,
+      "date": "2026-04-30",
+      "category": "Outros",
+      "id": 29
+    },
+    {
+      "type": "deposito",
+      "description": "Coisa coisa",
+      "value": 10,
+      "date": "2026-04-30",
+      "category": "Outros",
+      "id": 30
+    },
+    {
+      "type": "deposito",
+      "description": "Uouuuu",
+      "value": 3000,
+      "date": "2026-05-01",
+      "category": "Outros",
+      "id": 31
     }
   ]
 }

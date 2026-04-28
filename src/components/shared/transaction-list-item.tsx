@@ -58,8 +58,8 @@ export default function TransactionListItem({
 
       <div className="flex flex-col ml-14 lg:flex-row lg:items-center gap-2 lg:gap-4 lg:ml-auto">
         {category && (
-          <Badge type={configCategory.badge} className="w-fit">
-            {configCategory.label}
+          <Badge type={configCategory?.badge} className="w-fit">
+            {configCategory?.label}
           </Badge>
         )}
 

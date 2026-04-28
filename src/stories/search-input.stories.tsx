@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import SearchInput from "../components/ui/search-input";
-import { useState } from "react";
 
 const meta: Meta<typeof SearchInput> = {
   title: "UI/SearchInput",

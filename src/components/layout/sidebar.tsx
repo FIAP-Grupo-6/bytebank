@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { navItems } from '@/constants/navigation';
-import { Separator } from '@/components/ui/separator';
 import {
   Sidebar,
   SidebarContent,

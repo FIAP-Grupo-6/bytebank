@@ -11,33 +11,35 @@ import { useMemo, useState } from 'react';
 import { useDeleteTransaction } from '@/hooks/useDeleteTransaction';
 import TransactionListItem from '@/components/shared/transaction-list-item';
 import { NewTransactionButton } from '@/components/shared/new-transaction-button';
-import { TransactionFormModal } from '@/views/TransactionFormModal.tsx';
-import { Transaction } from '@/types/transaction.ts';
+import { TransactionFormModal } from '@/views/TransactionFormModal';
+import { Transaction } from '@/types/transaction';
 
 interface Props {
-  initialTransactions: any[];
+  initialTransactions: Transaction[];
 }
 
 type FilterType = 'todos' | 'deposito' | 'pagamento' | 'transferencia' | 'saque';
+
+const filters: { label: string; value: FilterType }[] = [
+  { label: 'Todos', value: 'todos' },
+  { label: 'Depósitos', value: 'deposito' },
+  { label: 'Pagamentos', value: 'pagamento' },
+  { label: 'Transferências', value: 'transferencia' },
+  { label: 'Saques', value: 'saque' },
+];
 
 export default function TransactionsClient({ initialTransactions }: Props) {
   const router = useRouter();
 
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState<FilterType>('todos');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [transaction, setTransaction] = useState<Transaction | undefined>(undefined);
 
   const { deleteConfirm, handleDeleteClick, handleConfirmDelete, handleCancelDelete } =
     useDeleteTransaction(async () => {
       router.refresh();
     });
-
-  const filters = [
-    { label: 'Todos', value: 'todos' },
-    { label: 'Depósitos', value: 'deposito' },
-    { label: 'Pagamentos', value: 'pagamento' },
-    { label: 'Transferências', value: 'transferencia' },
-    { label: 'Saques', value: 'saque' },
-  ];
 
   const filteredTransactions = useMemo(() => {
     return initialTransactions
@@ -45,16 +47,13 @@ export default function TransactionsClient({ initialTransactions }: Props) {
       .filter((t) => (filter === 'todos' ? true : t.type === filter));
   }, [initialTransactions, search, filter]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [transaction, setTransaction] = useState<Transaction | undefined>(undefined);
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       <TransactionFormModal
         transaction={transaction}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSaved={(_) => {
+        onSaved={() => {
           setIsModalOpen(false);
           router.refresh();
         }}

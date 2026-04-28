@@ -1,18 +1,18 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Plus } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import Title from '@/components/ui/title';
 import List from '@/components/shared/list';
 import SearchInput from '@/components/ui/search-input';
 import FilterButtons from '@/components/shared/filter-buttons';
 import MessageConfirm from '@/components/shared/message-confirm';
 import Text from '@/components/ui/text';
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useDeleteTransaction } from '@/hooks/useDeleteTransaction';
 import TransactionListItem from '@/components/shared/transaction-list-item';
 import { NewTransactionButton } from '@/components/shared/new-transaction-button';
+import { TransactionFormModal } from '@/views/TransactionFormModal.tsx';
+import { Transaction } from '@/types/transaction.ts';
 
 interface Props {
   initialTransactions: any[];
@@ -45,12 +45,30 @@ export default function TransactionsClient({ initialTransactions }: Props) {
       .filter((t) => (filter === 'todos' ? true : t.type === filter));
   }, [initialTransactions, search, filter]);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [transaction, setTransaction] = useState<Transaction | undefined>(undefined);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <TransactionFormModal
+        transaction={transaction}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSaved={(_) => {
+          setIsModalOpen(false);
+          router.refresh();
+        }}
+      />
+
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <Title size="h2">Transações</Title>
-          <NewTransactionButton />
+          <NewTransactionButton
+            onClick={() => {
+              setTransaction(undefined);
+              setIsModalOpen(true);
+            }}
+          />
         </div>
 
         <SearchInput value={search} onChange={setSearch} placeholder="Buscar transações..." />
@@ -70,7 +88,10 @@ export default function TransactionsClient({ initialTransactions }: Props) {
               value={transaction.value}
               type={transaction.type}
               category={transaction.category}
-              onEdit={() => console.log('Editar', transaction.id)}
+              onEdit={() => {
+                setTransaction(transaction);
+                setIsModalOpen(true);
+              }}
               onDelete={() => handleDeleteClick(transaction.id, transaction.description)}
             />
           )}

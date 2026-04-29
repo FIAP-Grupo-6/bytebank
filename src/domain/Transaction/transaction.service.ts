@@ -6,7 +6,7 @@ import { Transaction } from '@/types/transaction';
  * Handles all transaction-related API calls
  */
 export class TransactionService {
-  private baseUrl = process.env.NEXT_PUBLIC_TRANSACTION_API_URL || 'http://localhost:3001';
+  private baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
   /**
    * Fetch all transactions

@@ -1,8 +1,19 @@
 # ByteBank
 
-A modern banking application built with Next.js for FIAP POS graduation project.
+ByteBank is a modern banking dashboard that allows users to:
 
-- **Slides**: [Show Preview](https://skywork.live/share/v2/ppt/2032202556944011264?pid=2032202002860441600&sid=gen_ppt-NjH4a7u22&t=gen_ppt&mode=102)
+- Track transactions
+- Manage balances
+- Visualize financial insights
+- Simulate transfers
+
+Built as a FIAP postgraduate project focusing on scalable frontend architecture.
+
+## Preview
+
+![Dashboard](./public/images/dashboard.png)
+
+![Transactions](./public/images/transactions.png)
 
 ## Stack
 
@@ -35,13 +46,13 @@ src/
 
 The project follows the **Model-View-ViewModel** (MVVM) pattern:
 
-- **Model**: Domain types and schemas defined in `/src/domain` with Zod validation
-- **ViewModel**: Hooks inside domain use cases (for example `/src/domain/User/useCases`) managing state and business logic
-- **View**: React components in `/src/views` consuming the ViewModel
+- **Model**: Domain types and schemas defined in `/src/domain`.
+- **ViewModel**: Custom React hooks that orchestrate domain use cases and manage UI state (for example `/src/domain/User/useCases`).
+- **View**: React components in `/src/views` consuming the ViewModel.
 
 ### Example Flow
 
-1. **Model** (`src/domain/User/user.types.ts`): Defines `UserSchema` and `User` type with Zod
+1. **Model** (`src/domain/User/user.types.ts`): Defines `UserSchema` and `User` type.
 2. **Service** (`src/domain/User/user.service.ts`): Handles user API calls
 3. **ViewModel** (`src/domain/User/useCases/UserViewModel.ts`): Provides `useUserViewModel` for state and actions
 4. **View** (`src/views/UserList.tsx`): `UserListView` consumes the ViewModel
@@ -69,6 +80,32 @@ npm run build
 npm start
 ```
 
+## Mock API
+
+This project uses JSON Server to simulate a backend during development.
+
+### Run the API
+
+```bash
+npm run json-server
+```
+
+The API will be available at [http://localhost:3001](http://localhost:3001).
+
+### Example Endpoints
+
+- `GET /transactions`
+- `GET /transactions/:id`
+- `POST /transactions`
+- `PATCH /transactions/:id`
+- `DELETE /transactions/:id`
+
+Make sure your `.env.local` is configured:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3001
+```
+
 ## Scripts
 
 - `npm run dev` - Start development server
@@ -79,6 +116,7 @@ npm start
 - `npm run format` - Format code with Prettier
 - `npm run storybook` - Start Storybook
 - `npm run build-storybook` - Build Storybook
+- `npm run json-server` - Start mock API
 
 ## Adding Components with shadcn/ui
 
@@ -92,14 +130,6 @@ Example:
 ```bash
 npx shadcn-ui@latest add card
 npx shadcn-ui@latest add button
-```
-
-## Environment Variables
-
-Create a `.env.local` file in the root directory:
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:3000/api
 ```
 
 ## Code Style

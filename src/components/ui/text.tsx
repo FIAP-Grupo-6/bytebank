@@ -10,7 +10,7 @@ export default function Text({
   ...props
 }: TextProps) {
   return (
-    <p className={`text-sm text-muted-foreground ${className}`} {...props}>
+    <p className={`text-muted-foreground ${className}`} {...props}>
       {children}
     </p>
   );

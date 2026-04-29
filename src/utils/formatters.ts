@@ -65,7 +65,14 @@ export function formatDate(
   date: string | Date,
   { locale = "pt-BR", options = { day: "numeric", month: "short" } }: FormatDateOptions = {}
 ): string {
-  const parsedDate = new Date(date);
+  let parsedDate: Date;
+
+  if (typeof date === "string") {
+    const [year, month, day] = date.split("-").map(Number);
+    parsedDate = new Date(year, month - 1, day);
+  } else {
+    parsedDate = date;
+  }
 
   return parsedDate.toLocaleDateString(locale, options);
 }

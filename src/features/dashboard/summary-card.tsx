@@ -1,4 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
+import Text from '@/components/ui/text';
 import { formatCurrency } from '@/utils/formatters';
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 
@@ -18,7 +19,7 @@ export function SummaryCard({
   return (
     <Card>
       <CardContent className="px-4 py-2 md:p-4">
-        <p className="text-xs text-muted-foreground uppercase tracking-wide mb-4">Resumo mensal</p>
+        <Text className="text-sm uppercase mb-4">Resumo mensal</Text>
         <div className="flex flex-col sm:flex-row sm:justify-between gap-3 mb-4">
           <div className="min-w-0">
             <div className="flex items-center gap-1 text-xs text-muted-foreground mb-1">

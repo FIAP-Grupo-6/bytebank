@@ -97,7 +97,7 @@ export default function TransactionsClient({ initialTransactions }: Props) {
         />
 
         <div className="text-center">
-          <Text>{filteredTransactions.length} transações encontradas</Text>
+          <Text className='text-xs'>{filteredTransactions.length} transações encontradas</Text>
         </div>
 
         {deleteConfirm && (

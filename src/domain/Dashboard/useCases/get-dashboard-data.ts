@@ -4,7 +4,7 @@ import {
   calculateDashboardMetrics,
   getRecentTransactions,
 } from '../utils/dashboard.utils';
-import { DashboardData } from '../types/dashboard.types';
+import { DashboardData } from '../dashboard.types';
 
 export async function getDashboardData(): Promise<DashboardData> {
   const transactions = await transactionService.getAll();

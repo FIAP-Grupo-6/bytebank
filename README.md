@@ -9,14 +9,6 @@ ByteBank is a modern banking dashboard that allows users to:
 
 Built as a FIAP postgraduate project focusing on scalable frontend architecture.
 
-## Preview
-
-![Dashboard](./public/images/dashboard.png)
-
-![Transactions](./public/images/transactions.png)
-
-![Add-Transaction](./public/images/add-transaction.png)
-
 ## Stack
 
 - **Framework**: Next.js 15 with TypeScript

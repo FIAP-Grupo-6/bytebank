@@ -1,7 +1,10 @@
-import React, { useEffect, useRef, useId } from "react";
+'use client';
+
+import { useEffect, useRef, useId } from "react";
 import { Button } from '@/components/ui/button';
 import Title from "../ui/title";
 import Text from "../ui/text";
+import Modal from "./modal";
 
 interface MessageConfirmProps {
   isOpen: boolean;
@@ -34,19 +37,11 @@ export default function MessageConfirm({
     }
   }, [isOpen]);
 
-  if (!isOpen) return null;
-
   return (
-    <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-      role="presentation"
-    >
+    <Modal isOpen={isOpen} onClose={onCancel}>
       <div
-        role="dialog"
-        aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
-        className="bg-card border border-border rounded-xl p-6 max-w-sm w-full animate-in fade-in slide-in-from-bottom-4"
       >
         <Title id={titleId} size="h3">
           {title}
@@ -75,6 +70,6 @@ export default function MessageConfirm({
           </Button>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }

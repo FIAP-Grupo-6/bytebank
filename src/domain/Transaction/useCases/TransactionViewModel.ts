@@ -12,7 +12,8 @@ export class TransactionViewModel {
    * Fetch all transactions
    */
   async getAll(): Promise<Transaction[]> {
-    return await transactionService.getAll();
+    const transactions = await transactionService.getAll();
+    return transactions.sort((a, b) => b.date.localeCompare(a.date));
   }
 
   /**

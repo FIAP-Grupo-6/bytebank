@@ -59,7 +59,7 @@ export default function TransactionsClient({ initialTransactions }: Props) {
         }}
       />
 
-      <div className="space-y-6">
+      <div className="space-y-6 p-4">
         <div className="flex items-center justify-between">
           <Title size="h2">Transações</Title>
           <NewTransactionButton
@@ -97,7 +97,7 @@ export default function TransactionsClient({ initialTransactions }: Props) {
         />
 
         <div className="text-center">
-          <Text className='text-xs'>{filteredTransactions.length} transações encontradas</Text>
+          <Text className='text-sm'>{filteredTransactions.length} transações encontradas</Text>
         </div>
 
         {deleteConfirm && (

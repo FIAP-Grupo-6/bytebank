@@ -50,7 +50,7 @@ export default function TransactionListItem({
             {description}
           </Title>
 
-          <Text>
+          <Text className='text-sm'>
             <time dateTime={date}>{formattedDate}</time>
           </Text>
         </div>

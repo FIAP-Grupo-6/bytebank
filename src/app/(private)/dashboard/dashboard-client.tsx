@@ -27,7 +27,7 @@ export default function DashboardClient({ balance, income, expense, recentTransa
   const openCreateModal = () => setIsModalOpen(true);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 p-4">
       <TransactionFormModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

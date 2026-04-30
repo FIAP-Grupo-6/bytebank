@@ -29,8 +29,8 @@ export default function TransactionListItem({
   onDelete,
 }: TransactionListItemProps) {
   const formattedDate = formatDate(date);
-  const configCategory =
-    (category && categoryMap[category as Category]) || categoryMap['other'];
+  const configCategory = (category && categoryMap[category as Category]) || categoryMap['other'];
+  const normalizedValue = type === 'deposito' ? Math.abs(value) : -Math.abs(value);
 
   return (
     <article
@@ -63,7 +63,7 @@ export default function TransactionListItem({
           </Badge>
         )}
 
-        <Amount value={value} />
+        <Amount value={normalizedValue} />
 
         {(onEdit || onDelete) && (
           <div className="flex items-center justify-end gap-2 lg:ml-2">

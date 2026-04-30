@@ -6,5 +6,5 @@ export interface TransactionFormData {
   description: string;
   value: number;
   date: string;
-  category: string | Category;
+  category: Category;
 }

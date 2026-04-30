@@ -50,6 +50,7 @@ export default function TransactionsClient({ initialTransactions }: Props) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <TransactionFormModal
+        key={transaction?.id ?? 'new'}
         transaction={transaction}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

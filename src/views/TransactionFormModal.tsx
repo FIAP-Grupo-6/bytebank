@@ -7,7 +7,7 @@ import { Transaction, TransactionType } from '@/types/transaction';
 import { Input } from '@/components/ui/input';
 import { ArrowLeftRight, Banknote, CreditCard, Download, type LucideIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { categoryMap } from '@/types/category.ts';
+import { Category, categoryMap } from '@/types/category.ts';
 import {
   Select,
   SelectContent,
@@ -31,8 +31,8 @@ const TRANSACTION_TYPES: Array<{
   label: string;
   icon: LucideIcon;
 }> = [
-  { value: 'deposito', label: 'Entrada', icon: Banknote },
-  { value: 'pagamento', label: 'Saída', icon: CreditCard },
+  { value: 'deposito', label: 'Depósito', icon: Banknote },
+  { value: 'pagamento', label: 'Pagamento', icon: CreditCard },
   { value: 'transferencia', label: 'Transferência', icon: ArrowLeftRight },
   { value: 'saque', label: 'Saque', icon: Download },
 ];
@@ -160,8 +160,15 @@ export function TransactionFormModal({
               id="value-input"
               type="number"
               step="0.01"
+              min={0}
               value={vm.value}
-              onChange={(e) => vm.setValue(e.target.value === '' ? 0 : Number(e.target.value))}
+              onChange={(e) => {
+                const value = Number(e.target.value);
+
+                if (value < 0) return;
+
+                vm.setValue(e.target.value === '' ? 0 : value);
+              }}
               placeholder="0,00"
               required
               aria-required="true"
@@ -224,7 +231,7 @@ export function TransactionFormModal({
           <label htmlFor="category-input" className="text-micro text-muted-foreground mb-2 block">
             Categoria <span aria-label="obrigatório">*</span>
           </label>
-          <Select value={vm.category} onValueChange={(value) => vm.setCategory(value)}>
+          <Select value={vm.category} onValueChange={(value: Category) => vm.setCategory(value)}>
             <SelectTrigger>
               <SelectValue placeholder="Selecione uma categoria" />
             </SelectTrigger>

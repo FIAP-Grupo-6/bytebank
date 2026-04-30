@@ -6,12 +6,12 @@ export function calculateDashboardMetrics(transactions: Transaction[]) {
   let expense = 0;
 
   for (const t of transactions) {
-    balance += t.value;
-
-    if (t.value > 0) {
+    if (t.type === 'deposito') {
+      balance += t.value;
       income += t.value;
     } else {
-      expense += Math.abs(t.value);
+      balance -= t.value;
+      expense += t.value;
     }
   }
 

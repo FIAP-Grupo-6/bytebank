@@ -1,0 +1,28 @@
+{
+  "transactions": [
+    {
+      "type": "pagamento",
+      "description": "Teste",
+      "value": 25.5,
+      "date": "2026-04-23",
+      "category": "transport",
+      "id": 1
+    },
+    {
+      "type": "saque",
+      "description": "Teste 2",
+      "value": 22,
+      "date": "2026-04-30",
+      "category": "food",
+      "id": 2
+    },
+    {
+      "type": "transferencia",
+      "description": "Teste",
+      "value": 66,
+      "date": "2026-04-30",
+      "category": "food",
+      "id": 3
+    }
+  ]
+}

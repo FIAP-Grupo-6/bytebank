@@ -2,11 +2,22 @@
 
 import { useTransactionFormViewModel } from '@/domain/Transaction/useCases/TransactionFormViewModel';
 import Modal from '@/components/shared/modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Transaction, TransactionType } from '@/types/transaction';
 import { Input } from '@/components/ui/input';
 import { ArrowLeftRight, Banknote, CreditCard, Download, type LucideIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { categoryMap } from '@/types/category.ts';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select.tsx';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover.tsx';
+import { Calendar } from '@/components/ui/calendar.tsx';
+import { format, parseISO } from 'date-fns';
 
 interface TransactionFormModalProps {
   isOpen: boolean;
@@ -35,6 +46,13 @@ export function TransactionFormModal({
   const vm = useTransactionFormViewModel(transaction);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (isOpen && !transaction) {
+      vm.reset();
+      setSubmitError(null);
+    }
+  }, [isOpen, transaction]);
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
@@ -50,6 +68,10 @@ export function TransactionFormModal({
     }
     if (!vm.date) {
       setSubmitError('Data é obrigatória');
+      return;
+    }
+    if (!vm.category) {
+      setSubmitError('Categoria é obrigatório');
       return;
     }
 
@@ -156,16 +178,40 @@ export function TransactionFormModal({
             <label htmlFor="date-input" className="text-micro text-muted-foreground mb-2 block">
               Data <span aria-label="obrigatório">*</span>
             </label>
-            <Input
-              id="date-input"
-              type="date"
-              value={vm.date}
-              onChange={(e) => vm.setDate(e.target.value)}
-              required
-              aria-required="true"
-              aria-invalid={!vm.date && !!submitError}
-              aria-describedby={!vm.date && !!submitError ? 'date-error' : undefined}
-            />
+            <Popover>
+              <PopoverTrigger asChild>
+                <Input
+                  id="date-input"
+                  type="text"
+                  value={vm.date ? format(parseISO(vm.date), 'dd/MM/yyyy') : ''}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value === '' || /^\d{2}\/\d{2}\/\d{4}$/.test(value)) {
+                      if (value === '') {
+                        vm.setDate('');
+                      } else {
+                        const [day, month, year] = value.split('/');
+                        vm.setDate(`${year}-${month}-${day}`);
+                      }
+                    }
+                  }}
+                  placeholder="DD/MM/AAAA"
+                  required
+                  aria-required="true"
+                  autoComplete="off"
+                  aria-invalid={!vm.date && !!submitError}
+                  aria-describedby={!vm.date && !!submitError ? 'date-error' : undefined}
+                  className="cursor-pointer"
+                />
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={vm.date ? parseISO(vm.date) : undefined}
+                  onSelect={(date) => vm.setDate(date ? date.toISOString().split('T')[0] : '')}
+                />
+              </PopoverContent>
+            </Popover>
             {!vm.date && !!submitError && (
               <p id="date-error" role="alert" className="text-red-500 text-sm mt-1">
                 Data é obrigatória
@@ -176,15 +222,20 @@ export function TransactionFormModal({
 
         <div>
           <label htmlFor="category-input" className="text-micro text-muted-foreground mb-2 block">
-            Categoria
+            Categoria <span aria-label="obrigatório">*</span>
           </label>
-          <Input
-            id="category-input"
-            type="text"
-            value={vm.category}
-            onChange={(e) => vm.setCategory(e.target.value)}
-            placeholder="Ex: Salário, Alimentação, Transporte..."
-          />
+          <Select value={vm.category} onValueChange={(value) => vm.setCategory(value)}>
+            <SelectTrigger>
+              <SelectValue placeholder="Selecione uma categoria" />
+            </SelectTrigger>
+            <SelectContent>
+              {Object.entries(categoryMap).map(([value, item]) => (
+                <SelectItem key={value} value={value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Error message */}

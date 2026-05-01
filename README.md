@@ -1,11 +1,6 @@
 # ByteBank
 
-ByteBank is a modern banking dashboard that allows users to:
-
-- Track transactions
-- Manage balances
-- Visualize financial insights
-- Simulate transfers
+ByteBank is a financial control system that allows users to manage income and expenses
 
 Built as a FIAP postgraduate project focusing on scalable frontend architecture.
 
@@ -21,39 +16,6 @@ Built as a FIAP postgraduate project focusing on scalable frontend architecture.
 - **Component Development**: Storybook
 - **Validation**: Zod
 - **Code Quality**: ESLint + Prettier
-- **Architecture**: MVVM
-
-## Project Structure
-
-```
-src/
-├── app/             # Next.js App Router pages
-├── components/      # Reusable UI components
-│   └── ui/          # shadcn/ui components
-├── domain/          # Domain modules (types, services, use cases)
-├── hooks/           # Custom React hooks
-├── styles/          # Global styles
-├── types/           # TypeScript type definitions
-├── utils/           # Utility functions
-└── views/           # MVVM view components
-
-.storybook/          # Storybook configuration
-```
-
-## Architecture: MVVM
-
-The project follows the **Model-View-ViewModel** (MVVM) pattern:
-
-- **Model**: Domain types and schemas defined in `/src/domain`.
-- **ViewModel**: Custom React hooks that orchestrate domain use cases and manage UI state (for example `/src/domain/User/useCases`).
-- **View**: React components in `/src/views` consuming the ViewModel.
-
-### Example Flow
-
-1. **Model** (`src/domain/User/user.types.ts`): Defines `UserSchema` and `User` type.
-2. **Service** (`src/domain/User/user.service.ts`): Handles user API calls
-3. **ViewModel** (`src/domain/User/useCases/UserViewModel.ts`): Provides `useUserViewModel` for state and actions
-4. **View** (`src/views/UserList.tsx`): `UserListView` consumes the ViewModel
 
 ## Getting Started
 

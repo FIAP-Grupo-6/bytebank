@@ -107,7 +107,6 @@ The project uses ESLint and Prettier for code quality. Configuration files:
 - [shadcn/ui](https://ui.shadcn.com/)
 - [Storybook](https://storybook.js.org/)
 - [Zod](https://zod.dev/)
-- [MVVM Pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)
 
 ## License
 

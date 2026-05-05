@@ -1,12 +1,19 @@
 # ByteBank
 
-ByteBank is a financial control system that allows users to manage income and expenses
+ByteBank is a financial control system that allows users to manage income and expenses.
 
 Built as a FIAP postgraduate project focusing on scalable frontend architecture.
 
 ## Preview
 
 ![Preview](/public/gif/preview.gif)
+
+## Features
+
+- **Dashboard**: View balance, income/expense summary, and recent transactions extract.
+- **Transaction Listing**: Full list with filters, search, and actions (view, edit, delete).
+- **Add/Edit Transactions**: Modal with form to create or edit transactions (type, value, date, category).
+- **Design System**: Reusable components documented in Storybook.
 
 ## Stack
 
@@ -16,8 +23,27 @@ Built as a FIAP postgraduate project focusing on scalable frontend architecture.
 - **Component Development**: Storybook
 - **Validation**: Zod
 - **Code Quality**: ESLint + Prettier
+- **Mock API**: JSON Server
+
+## Architecture
+
+The project follows a **domain-driven design (DDD)** architecture to separate responsibilities:
+
+- **`src/app/`**: Next.js pages (App Router) with server components for data fetching.
+- **`src/domain/`**: Business logic, types, and use cases (e.g., `Transaction`, `Dashboard`).
+- **`src/features/`**: Feature-specific components (e.g., dashboard cards).
+- **`src/components/`**: Reusable components (`ui/` for design system, `shared/` for common ones).
+- **`src/hooks/`**: Custom hooks (e.g., `useDeleteTransaction`).
+- **`src/utils/`**: Utilities (formatters, helpers).
+- **`src/types/`**: TypeScript type definitions.
+- **`mock/`**: Mocked data for development.
 
 ## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
 
 ### Install Dependencies
 
@@ -54,11 +80,11 @@ The API will be available at [http://localhost:3001](http://localhost:3001).
 
 ### Example Endpoints
 
-- `GET /transactions`
-- `GET /transactions/:id`
-- `POST /transactions`
-- `PATCH /transactions/:id`
-- `DELETE /transactions/:id`
+- `GET /transactions` - List transactions
+- `GET /transactions/:id` - Get transaction by ID
+- `POST /transactions` - Create transaction
+- `PATCH /transactions/:id` - Update transaction
+- `DELETE /transactions/:id` - Delete transaction
 
 Make sure your `.env.local` is configured:
 
@@ -66,7 +92,23 @@ Make sure your `.env.local` is configured:
 NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 
-## Scripts
+## Storybook
+
+To view and test components in isolation:
+
+```bash
+npm run storybook
+```
+
+Open [http://localhost:6006](http://localhost:6006) in your browser.
+
+For static build:
+
+```bash
+npm run build-storybook
+```
+
+## Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
@@ -98,7 +140,10 @@ The project uses ESLint and Prettier for code quality. Configuration files:
 
 - `.eslintrc.json` - ESLint rules
 - `.prettierrc.json` - Prettier formatting rules
-- `tsconfig.json` - TypeScript compiler options
+
+## Demo Video
+
+For a complete demonstration of the application flow (up to 5 minutes), watch the video located in the `public/video/` folder.
 
 ## Learn More
 

@@ -69,7 +69,7 @@ function ModalWithLongContent() {
 
           <p className="font-semibold mt-4">3. Limitações de Responsabilidade</p>
           <p className="text-muted-foreground">
-            A informação e os serviços inclusos neste website são fornecidos "como estão", sem garantias de qualquer tipo.
+            A informação e os serviços inclusos neste website são fornecidos &quot;como estão&quot;, sem garantias de qualquer tipo.
           </p>
 
           <div className="flex gap-3 pt-4">

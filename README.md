@@ -143,7 +143,7 @@ The project uses ESLint and Prettier for code quality. Configuration files:
 
 ## Demo Video
 
-For a complete demonstration of the application flow (up to 5 minutes), watch the video located in the `public/video/` folder.
+For a complete demonstration of the application flow, watch the video located in the `public/video/` folder.
 
 ## Learn More
 
